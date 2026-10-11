@@ -244,6 +244,14 @@ select{width:100%;padding:13px 15px;border-radius:14px;border:1.5px solid var(--
 .em{max-width:150px}
 #s-dash.wrap{max-width:1240px}
 .tbl td .btn.sm{padding:6px 10px;font-size:13px}
+
+.seg{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.seg button{border:1.5px solid var(--line);background:var(--card2);color:var(--ink);border-radius:10px;padding:3px 10px;font:inherit;font-size:12.5px;font-weight:700;cursor:pointer}
+.seg button.on[data-v="1"]{background:var(--ok);border-color:var(--ok);color:#022}
+.seg button.on[data-v="0.5"]{background:var(--warn);border-color:var(--warn);color:#241a02}
+.seg button.on[data-v="0"]{background:var(--bad);border-color:var(--bad);color:#fff}
+.gs{font-size:12.5px;font-weight:800;border-radius:99px;padding:1px 10px;margin-right:6px}
+.gs.ok{background:rgba(52,211,153,.18);color:var(--ok)}.gs.no{background:rgba(251,191,36,.18);color:var(--warn)}
 </style>
 </head>
 <body>
@@ -266,6 +274,7 @@ select{width:100%;padding:13px 15px;border-radius:14px;border:1.5px solid var(--
     <label for="a-pass">كلمة السر</label><div style="position:relative"><input id="a-pass" type="password" autocomplete="current-password" dir="ltr"><button type="button" class="eye r" id="a-eye" aria-label="إظهار كلمة السر">👁</button></div>
     <div id="a-err" class="status err hide"></div>
     <div id="a-claim" class="status wait hide"><div style="margin-bottom:10px">لسه مفيش مدرس متفعّل على النظام. لو ده حسابك، فعّله مرة واحدة كمدرس.</div><button class="btn full" id="a-claim-b">✔ تفعيل هذا الحساب كمدرس</button></div>
+    <div id="a-req" class="status wait hide"><div id="a-req-t" style="margin-bottom:10px"></div><button class="btn full" id="a-req-b">📨 إرسال طلب انضمام كمدرس</button><button class="btn ghost full" id="a-req-out" style="margin-top:8px">تسجيل خروج</button></div>
     <button class="btn full" id="a-go" style="margin-top:14px">دخول ▶</button>
   </div>
   <div class="foot"><a class="devwa" href="https://wa.me/201500492203" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"  aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg> تواصل مع المطور على واتساب · 01500492203</a></div>
@@ -276,7 +285,7 @@ select{width:100%;padding:13px 15px;border-radius:14px;border:1.5px solid var(--
   <div class="card">
     <div class="who-row"><div><h2 class="gold">📊 لوحة تحكم المدرس</h2><div class="sub" id="d-upd"></div></div>
       <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn ghost sm" id="d-ref">🔄 تحديث</button><button class="btn ghost sm" id="d-csv">⬇ CSV</button><button class="btn ghost sm" id="d-pdf">📄 PDF</button><button class="btn ghost sm" id="d-wipe" style="color:var(--bad);border-color:var(--bad)">🗑 مسح كل النتائج</button><button class="btn ghost sm" id="d-theme">◐</button><button class="btn ghost sm" id="d-out">خروج</button></div></div>
-    <div class="rt" style="margin:14px 0 0"><button class="tab on" data-tb="p-ov">نظرة عامة</button><button class="tab" data-tb="p-st">الطلاب</button><button class="tab" data-tb="p-gr">تصحيح المقالي <b id="t-gr"></b></button><button class="tab" data-tb="p-rq">الطلبات <b id="t-rq"></b></button><button class="tab" data-tb="p-q">تحليل الأسئلة</button><button class="tab" data-tb="p-tc">المدرسين</button></div>
+    <div class="rt" style="margin:14px 0 0"><button class="tab on" data-tb="p-ov">نظرة عامة</button><button class="tab" data-tb="p-st">الطلاب</button><button class="tab" data-tb="p-gr">تصحيح المقالي <b id="t-gr"></b></button><button class="tab" data-tb="p-rq">الطلبات <b id="t-rq"></b></button><button class="tab" data-tb="p-q">تحليل الأسئلة</button><button class="tab" data-tb="p-tc">المدرسين <b id="t-tc"></b></button></div>
   </div>
   <div id="p-ov"></div>
   <div id="p-st" class="hide">
@@ -516,7 +525,7 @@ const memStore={};
 const safeStorage={getItem:k=>{try{return localStorage.getItem(k)}catch(e){return memStore[k]??null}},setItem:(k,v)=>{try{localStorage.setItem(k,v)}catch(e){memStore[k]=v}},removeItem:k=>{try{localStorage.removeItem(k)}catch(e){delete memStore[k]}}};
 const isNetErr=m=>/Failed to fetch|NetworkError|Load failed|network request|fetch failed/i.test(String(m||""));
 const NET_HELP="تعذر الاتصال بالسيرفر. الأسباب المحتملة: (1) الصفحة مفتوحة من داخل معاينة أو تطبيق، افتحها من متصفح عادي أو من رابط https مستضاف (Netlify / GitHub Pages / Vercel). (2) مفيش إنترنت أو في VPN أو حاجب إعلانات بيحجب supabase.co. (3) مشروع Supabase متوقف (Paused)، افتح لوحة Supabase واضغط Restore.";
-const dbErr=e=>{ const m=(e&&e.message)||String(e); if(isNetErr(m)) return NET_HELP; if((e&&e.code==="PGRST205")||/schema cache|does not exist|Could not find/i.test(m)) return "قاعدة البيانات لسه مش مجهزة: شغّل ملف supabase_setup.sql في Supabase SQL Editor."; if(/42501|row-level security|permission denied/i.test(m)) return "صلاحيات قاعدة البيانات ناقصة: أعد تشغيل ملف supabase_setup.sql."; return m; };
+const dbErr=e=>{ const m=(e&&e.message)||String(e); if(isNetErr(m)) return NET_HELP; if((e&&e.code==="PGRST202")||/Could not find the function/i.test(m)) return "ميزة ناقصة في قاعدة البيانات: شغّل ملف supabase_setup.sql الجديد في Supabase ثم أعد المحاولة."; if((e&&e.code==="PGRST205")||/schema cache|does not exist|Could not find/i.test(m)) return "قاعدة البيانات لسه مش مجهزة: شغّل ملف supabase_setup.sql في Supabase SQL Editor."; if(/42501|row-level security|permission denied/i.test(m)) return "صلاحيات قاعدة البيانات ناقصة: أعد تشغيل ملف supabase_setup.sql."; return m; };
 async function ping(){ try{ const c=new AbortController(); const t=setTimeout(()=>c.abort(),9000); await fetch(CONFIG.SUPABASE_URL+"/auth/v1/health",{headers:{apikey:CONFIG.SUPABASE_KEY},signal:c.signal}); clearTimeout(t); return "ok"; }catch(e){ return "net"; } }
 function setConn(st,msg){
   const c=$("conn"); if(!c) return;
@@ -556,16 +565,47 @@ async function offerClaim(user){
   const inv=await sb.rpc("hx_claim_admin_by_invite");
   if(inv.error) throw inv.error;
   if(inv.data){ return enter(user); }
+  const b=$("a-go"); b.disabled=false; b.classList.remove("busy");
   const {data:ex,error}=await sb.rpc("hx_admin_exists");
   if(error) throw error;
-  const b=$("a-go"); b.disabled=false; b.classList.remove("busy");
-  if(ex){ await sb.auth.signOut(); return fail("الإيميل ده لسه مش مضاف كمدرس. اطلب من المدرس الأساسي يضيف إيميلك من تبويب «المدرسين» وبعدها سجّل دخول تاني."); }
+  if(ex){ return showJoinRequest(user); }
   const box=$("a-claim"); box.classList.remove("hide");
   $("a-claim-b").onclick=async()=>{
     const {data:ok,error:e}=await sb.rpc("hx_claim_first_admin");
     if(e) return fail(dbErr(e));
     if(!ok){ await sb.auth.signOut(); box.classList.add("hide"); return fail("تعذر التفعيل: الحساب ده مش مؤهل ليكون مدرس (ممكن يكون حساب طالب)."); }
     box.classList.add("hide"); await enter(user);
+  };
+}
+let JOIN_POLL=null;
+async function showJoinRequest(user){
+  const box=$("a-req"), t=$("a-req-t"), btn=$("a-req-b");
+  box.classList.remove("hide");
+  $("a-req-out").onclick=async()=>{ clearInterval(JOIN_POLL); try{await sb.auth.signOut();}catch(e){} location.reload(); };
+  const paint=s=>{
+    if(s==="pending"){ t.textContent="⏳ طلبك وصل للمدرس الأساسي. أول ما يوافق من لوحة التحكم هتتفتح لك اللوحة تلقائيًا (سيب الصفحة مفتوحة)."; btn.classList.add("hide"); }
+    else if(s==="rejected"){ t.textContent="❌ المدرس الأساسي رفض الطلب. تقدر تبعت طلب جديد."; btn.classList.remove("hide"); }
+    else{ t.textContent="الإيميل ده لسه مش مضاف كمدرس. ابعت طلب انضمام والمدرس الأساسي هيوافق عليه من لوحة التحكم."; btn.classList.remove("hide"); }
+  };
+  const cur=await sb.from("hx_admin_requests").select("status").eq("user_id",user.id).maybeSingle();
+  paint(cur.data?cur.data.status:null);
+  const startPoll=()=>{
+    clearInterval(JOIN_POLL);
+    JOIN_POLL=setInterval(async()=>{
+      const a=await sb.from("hx_admins").select("user_id").eq("user_id",user.id).maybeSingle();
+      if(a.data){ clearInterval(JOIN_POLL); box.classList.add("hide"); await enter(user); return; }
+      const q=await sb.from("hx_admin_requests").select("status").eq("user_id",user.id).maybeSingle();
+      if(q.data&&q.data.status==="rejected"){ clearInterval(JOIN_POLL); paint("rejected"); }
+    },6000);
+  };
+  if(cur.data&&cur.data.status==="pending") startPoll();
+  btn.onclick=async()=>{
+    btn.disabled=true;
+    const {data,error:e}=await sb.rpc("hx_request_admin");
+    btn.disabled=false;
+    if(e){ t.textContent="❌ "+dbErr(e); return; }
+    if(data==="approved"){ box.classList.add("hide"); return enter(user); }
+    paint("pending"); startPoll();
   };
 }
 async function enter(user){
@@ -605,7 +645,8 @@ document.querySelectorAll("[data-tb]").forEach(b=>b.onclick=()=>{
   ["p-ov","p-st","p-gr","p-rq","p-q","p-tc"].forEach(id=>$(id).classList.toggle("hide",id!==b.dataset.tb));
   if(b.dataset.tb==="p-tc") loadTeachers();
 });
-function drawAll(){ drawOverview(); drawStudents(); drawGrading(); drawRequests(); drawQuestions(); }
+function drawAll(){ drawOverview(); drawStudents(); drawGrading(); drawRequests(); drawQuestions(); refreshTcBadge(); }
+async function refreshTcBadge(){ try{ const r=await sb.from("hx_admin_requests").select("id").eq("status","pending"); if(!r.error) $("t-tc").textContent=(r.data&&r.data.length)?"("+r.data.length+")":""; }catch(e){} }
 
 /* ============ نظرة عامة ============ */
 const card=(n,l,c)=>`<div class="stat"><b${c?` style="color:${c}"`:""}>${n}</b><span>${l}</span></div>`;
@@ -685,8 +726,8 @@ async function reopenExam(uid){
   const x=ROWS.find(y=>y.uid===uid);
   if(!confirm("هتفتح محاولة جديدة للطالب «"+x.name+"». المحاولة الحالية هتتأرشف (تفضل محفوظة عندك) وهيبدأ امتحان جديد من الأول. متأكد؟")) return;
   const {error}=await sb.rpc("hx_admin_reopen",{p_user:uid,p_exam_id:CONFIG.EXAM_ID});
-  if(error){ alert(dbErr(error)); return; }
-  closeModal(); await loadAll();
+  if(error){ alert("تعذر فتح المحاولة: "+dbErr(error)); return; }
+  closeModal(); await loadAll(); alert("✅ تم فتح محاولة جديدة للطالب «"+x.name+"». المحاولة القديمة اتأرشفت، وأول ما يفتح الصفحة هيبدأ امتحان جديد.");
 }
 
 /* ============ جدول إجابات الاختيار (صح / غلط / لم يجب) ============ */
@@ -708,6 +749,7 @@ function wireQa(){
 const essOf=x=>x.id!=null?E.find(z=>z.n===x.id):E[x.idx];
 
 /* ============ مراجعة وتصحيح طالب سلّم / أُغلق عليه ============ */
+const mvOf=v=>v==null?null:(typeof v==="object"?v:{m:+v});
 async function reviewRow(id){
   const {data:r,error}=await sb.from(CONFIG.TABLE).select("*").eq("id",id).single();
   if(error){ alert(dbErr(error)); return; }
@@ -715,38 +757,95 @@ async function reviewRow(id){
   const arc=ar.data||[];
   const byQ={}; (r.answers||[]).forEach(a=>{ byQ[a.q]=a.chosen; });
   const essArr=r.essays||[], saved=r.teacher_marks||{};
+  const cls=v=>v>=1?"full":v>0?"part":"miss";
   const essHTML=E.map((e,ei)=>{
     const x=essArr.find(z=>z.id!=null?z.id===e.n:z.idx===ei); const t=x?(x.text||""):""; const ev=evalEssay(e,t);
-    return `<div class="card"><div class="who-row"><p class="qt" style="flex:1;min-width:240px">${ei+1}. ${esc(e.q)}</p><div style="min-width:170px"><label style="margin:0 0 4px">درجة السؤال (من ${e.m})</label><input class="em" type="number" data-ei="${ei}" data-max="${e.m}" data-auto="${r1(ev.marks)}" min="0" max="${e.m}" step="0.25" value="${saved[ei]??""}" placeholder="آلي: ${r1(ev.marks)}"></div></div>${x&&x.revealed?'<div class="lockn">⚠️ الطالب فتح النموذج قبل التسليم</div>':""}${compareHTML(e,t)}</div>`;
+    const sm=mvOf(saved[ei]);
+    const pv=e.pts.map((p,k)=>(sm&&sm.p&&sm.p[k]!=null)?+sm.p[k]:ev.pts[k].r);
+    const mk=sm&&sm.m!=null?sm.m:"";
+    return `<div class="card gq" data-ei="${ei}">
+     <div class="who-row"><p class="qt" style="flex:1;min-width:240px">${ei+1}. ${esc(e.q)} <span class="gs" id="gs${ei}"></span></p>
+      <div style="min-width:170px"><label style="margin:0 0 4px">درجة السؤال (من ${e.m})</label><input class="em" type="number" data-ei="${ei}" data-max="${e.m}" ${mk!==""?'data-manual="1"':""} min="0" max="${e.m}" step="0.25" value="${mk}" placeholder="—"></div></div>
+     ${x&&x.revealed?'<div class="lockn">⚠️ الطالب فتح النموذج قبل التسليم</div>':""}
+     <div class="cmp-grid"><div class="col mine"><h4>✍️ إجابة الطالب <span class="wc">(${words(t)} كلمة)</span></h4><div class="mine-t">${highlight(e,t)}</div></div>
+      <div class="col model"><h4>🏆 النموذج — حدّد النقاط اللي ذكرها الطالب</h4><ol class="mp">${e.pts.map((p,k)=>`<li class="${cls(pv[k])}" data-k="${k}"><div>${esc(p.t)}</div><div class="seg" data-r="${pv[k]}"><button type="button" data-v="1" class="${pv[k]>=1?"on":""}">✔ مذكورة</button><button type="button" data-v="0.5" class="${pv[k]>0&&pv[k]<1?"on":""}">◐ جزئية</button><button type="button" data-v="0" class="${pv[k]===0?"on":""}">✖ ناقصة</button></div></li>`).join("")}</ol></div></div>
+     <label style="margin-top:10px">تعليقك على السؤال ده (بيظهر للطالب)</label><textarea class="gf" data-ei="${ei}" style="min-height:56px">${esc(sm&&sm.f?sm.f:"")}</textarea></div>`;
   }).join("");
   const arcHTML=arc.length?`<div class="card"><h3 class="gold">محاولات سابقة (${arc.length})</h3>${arc.map(a=>{ const rs=(a.data||{}).result; return `<div class="sub">${new Date(a.archived_at).toLocaleString("ar-EG")} · ${rs?"اختيار: "+r1(+rs.mcq_score)+(rs.teacher_essay_score!=null?" · نهائي: "+r1(fin(rs)):""):"لم يسلّم"}</div>`; }).join("")}</div>`:"";
   const g=graded(r);
   modal(`<div class="who-row"><div><h3 class="gold">${esc(r.student_name)}</h3><div class="sub"><span dir="ltr">${esc(r.phone||"")}</span>${r.grp?" · "+esc(r.grp):""} · سلّم: ${new Date(r.created_at).toLocaleString("ar-EG")}</div></div><div style="display:flex;gap:8px"><button class="btn ghost sm" id="rv-pdf">📄 تقرير PDF</button><button class="btn ghost sm" id="rv-x">إغلاق النافذة</button></div></div>
    <div style="margin:8px 0">${r.closed_by_admin?bdg("أُغلق بواسطة المدرس","b-prog")+" ":""}${r.late?bdg("متأخر","b-prog")+" ":""}${r.auto_submitted?bdg("تسليم تلقائي","b-none")+" ":""}${g?bdg("تم التصحيح","b-done"):bdg("المقالي لم يُصحَّح","b-prog")}</div>
-   <div class="stats s5"><div class="stat"><b style="font-size:26px">${g?r1(fin(r)):"–"}</b><span>الدرجة النهائية / 100</span></div><div class="stat"><b>${r1(+r.mcq_score)}</b><span>الاختيار / ${CONFIG.MCQ_MARKS} (تلقائي)</span></div><div class="stat"><b id="rv-tot">${g?r1(+r.teacher_essay_score):"–"}</b><span>المقالي / ${CONFIG.ESSAY_MARKS} (يدوي)</span></div><div class="stat"><b>${mmss(r.time_spent_sec)}</b><span>الوقت</span></div><div class="stat"><b>${r.tab_switches}</b><span>مرات الخروج</span></div></div>
-   <div class="card" style="margin-top:14px"><h3 class="gold">تصحيح المقالي اليدوي</h3><div class="sub">ادّي كل سؤال درجته (من تحت). المجموع بيتحسب لوحده، والطالب هيشوفه أول ما تحفظ. تقدر تملى التقدير الآلي كاقتراح وتعدّل عليه.</div>
-    <label>ملاحظة للطالب (اختياري)</label><textarea id="rv-nt" style="min-height:70px">${esc(r.teacher_note||"")}</textarea>
-    <div class="row" style="margin-top:12px"><button class="btn" id="rv-save">💾 حفظ التصحيح</button><button class="btn ghost" id="rv-auto">ملء بالتقدير الآلي</button><button class="btn wa" id="rv-wa">إرسال للطالب واتساب</button><button class="btn ghost" id="rv-ro">محاولة جديدة</button></div><div id="rv-st"></div></div>
+   <div class="stats s5"><div class="stat"><b id="rv-fin" style="font-size:26px">${g?r1(fin(r)):"–"}</b><span>الدرجة النهائية / 100</span></div><div class="stat"><b>${r1(+r.mcq_score)}</b><span>الاختيار / ${CONFIG.MCQ_MARKS} (تلقائي)</span></div><div class="stat"><b id="rv-tot">${g?r1(+r.teacher_essay_score):"–"}</b><span>المقالي / ${CONFIG.ESSAY_MARKS} (يدوي)</span></div><div class="stat"><b>${mmss(r.time_spent_sec)}</b><span>الوقت</span></div><div class="stat"><b>${r.tab_switches}</b><span>مرات الخروج</span></div></div>
+   <div class="card" style="margin-top:14px"><h3 class="gold">تصحيح المقالي اليدوي</h3>
+    <div class="sub">لكل سؤال: حدّد كل نقطة من النموذج (✔ مذكورة / ◐ جزئية / ✖ ناقصة) وهيتقترح لك الدرجة، وتقدر تغيّرها بإيدك. اكتب تعليقك لو حبيت، وبعد الحفظ كل ده بيظهر للطالب في صفحة نتيجته.</div>
+    <label>ملاحظة عامة للطالب (اختياري)</label><textarea id="rv-nt" style="min-height:60px">${esc(r.teacher_note||"")}</textarea>
+    <div class="row" style="margin-top:12px"><button class="btn" id="rv-save">💾 حفظ التصحيح ونشره للطالب</button><button class="btn ghost" id="rv-auto">ملء الدرجات الفاضية بالمقترح</button></div>
+    <div class="row" style="margin-top:10px"><button class="btn wa" id="rv-wa">📲 إرسال الإجابات للطالب واتساب</button><button class="btn ghost" id="rv-cp">نسخ الرسالة</button><button class="btn ghost" id="rv-ro">محاولة جديدة</button></div><div id="rv-st"></div></div>
    ${essHTML}${qaBlock(i=>byQ[i+1]??null)}${arcHTML}`,true);
   $("rv-x").onclick=closeModal; wireQa();
-  const inputs=()=>[...document.querySelectorAll(".em")];
+  const root=$("modal-c");
+  const inputs=()=>[...root.querySelectorAll(".em")];
   const clamp=i=>Math.min(+i.dataset.max,Math.max(0,+i.value));
+  const ptsOf=ei=>[...root.querySelectorAll('.gq[data-ei="'+ei+'"] .seg')].map(s=>+s.dataset.r);
+  const sugg=ei=>{ const p=ptsOf(ei), m=+root.querySelector('.em[data-ei="'+ei+'"]').dataset.max; return Math.round((p.reduce((a,b)=>a+b,0)/p.length)*m*4)/4; };
   const sum=()=>Math.round(inputs().reduce((a,i)=>a+(i.value===""?0:clamp(i)),0)*100)/100;
-  const upd=()=>{ $("rv-tot").textContent=inputs().some(i=>i.value!=="")?r1(sum()):"–"; };
-  inputs().forEach(i=>i.oninput=upd); upd();
-  $("rv-auto").onclick=()=>{ inputs().forEach(i=>{ i.value=Math.round(+i.dataset.auto*4)/4; }); upd(); };
-  $("rv-save").onclick=async()=>{
+  const stat=ei=>{ const p=ptsOf(ei), bad=p.filter(v=>v<1).length, el=$("gs"+ei); el.className="gs "+(bad?"no":"ok"); el.textContent=bad?"⚠️ ناقصة ("+bad+" نقاط)":"✅ إجابة كاملة"; };
+  const upd=()=>{ const any=inputs().some(i=>i.value!==""); const t=sum(); $("rv-tot").textContent=any?r1(t):"–"; $("rv-fin").textContent=any?r1(+r.mcq_score+t):"–"; };
+  E.forEach((_,ei)=>stat(ei));
+  inputs().forEach(i=>i.oninput=()=>{ i.dataset.manual="1"; upd(); });
+  upd();
+  root.querySelectorAll(".seg").forEach(sg=>sg.onclick=e=>{
+    const b=e.target.closest("button"); if(!b) return;
+    sg.dataset.r=b.dataset.v; sg.querySelectorAll("button").forEach(x=>x.classList.toggle("on",x===b));
+    const li=sg.closest("li"); li.className=cls(+b.dataset.v); li.dataset.t="1";
+    const ei=+sg.closest(".gq").dataset.ei; stat(ei);
+    const inp=root.querySelector('.em[data-ei="'+ei+'"]');
+    if(!inp.dataset.manual){ inp.value=sugg(ei); } upd();
+  });
+  $("rv-auto").onclick=()=>{ inputs().forEach(i=>{ if(i.value===""){ i.value=sugg(+i.dataset.ei); } }); upd(); };
+  const collect=()=>{
     const marks={}; let any=false;
-    inputs().forEach(i=>{ if(i.value!==""){ any=true; marks[i.dataset.ei]=Math.round(clamp(i)*100)/100; } });
-    const total=any?sum():null;
-    const {error:er}=await sb.from(CONFIG.TABLE).update({teacher_essay_score:total,teacher_marks:any?marks:null,teacher_note:$("rv-nt").value||null}).eq("id",id);
-    $("rv-st").className="status "+(er?"err":"ok"); $("rv-st").textContent=er?dbErr(er):"✅ تم حفظ التصحيح"+(any?" — المقالي: "+r1(total)+" / "+CONFIG.ESSAY_MARKS:" (من غير درجات = لسه مش مصحَّح)"); if(!er) loadAll(true);
+    inputs().forEach(i=>{
+      const ei=+i.dataset.ei, card=root.querySelector('.gq[data-ei="'+ei+'"]');
+      const touched=[...card.querySelectorAll("li")].some(li=>li.dataset.t);
+      let v=i.value===""?null:Math.round(clamp(i)*100)/100;
+      if(v==null&&touched) v=sugg(ei);
+      if(v==null) return;
+      any=true;
+      const f=card.querySelector(".gf").value.trim();
+      marks[ei]={m:v,p:ptsOf(ei)}; if(f) marks[ei].f=f;
+    });
+    const total=any?Math.round(Object.values(marks).reduce((a,x)=>a+x.m,0)*100)/100:null;
+    return {marks:any?marks:null,total};
   };
-  $("rv-wa").onclick=()=>{
-    const any=inputs().some(i=>i.value!==""), es=any?sum():null;
-    const msg=`📜 نتيجة امتحان التاريخ – الوحدة الأولى\n👤 ${r.student_name}\n• الاختيار: ${r1(+r.mcq_score)} / ${CONFIG.MCQ_MARKS}\n• المقالي: ${es!=null?r1(es)+" / "+CONFIG.ESSAY_MARKS:"لسه بيتصحح"}`+(es!=null?`\n✅ الدرجة النهائية: ${r1(+r.mcq_score+es)} / 100`:"")+($("rv-nt").value?`\n📝 ملاحظة: ${$("rv-nt").value}`:"")+`\n\nبرعاية المطور: ${CONFIG.SPONSOR}`;
-    window.open("https://wa.me/"+toIntl(r.phone||"")+"?text="+encodeURIComponent(msg),"_blank");
+  $("rv-save").onclick=async()=>{
+    const c=collect();
+    const {error:er}=await sb.from(CONFIG.TABLE).update({teacher_essay_score:c.total,teacher_marks:c.marks,teacher_note:$("rv-nt").value||null}).eq("id",id);
+    $("rv-st").className="status "+(er?"err":"ok");
+    $("rv-st").textContent=er?dbErr(er):(c.total!=null?"✅ تم الحفظ والنشر للطالب — المقالي: "+r1(c.total)+" / "+CONFIG.ESSAY_MARKS+" · الدرجة النهائية: "+r1(+r.mcq_score+c.total):"تم الحفظ (من غير درجات = لسه مش مصحَّح)");
+    if(!er){ if(c.total!=null) $("rv-fin").textContent=r1(+r.mcq_score+c.total); loadAll(true); }
   };
+  const buildMsg=()=>{
+    const c=collect(), parts=[];
+    parts.push(`📜 نتيجة امتحان التاريخ – الوحدة الأولى\n👤 ${r.student_name}\n• الاختيار: ${r1(+r.mcq_score)} / ${CONFIG.MCQ_MARKS}\n• المقالي: ${c.total!=null?r1(c.total)+" / "+CONFIG.ESSAY_MARKS:"لسه بيتصحح"}`+(c.total!=null?`\n✅ الدرجة النهائية: ${r1(+r.mcq_score+c.total)} / 100`:""));
+    if($("rv-nt").value) parts.push("📝 "+$("rv-nt").value);
+    const det=[];
+    E.forEach((e,ei)=>{
+      const v=c.marks&&c.marks[ei]; if(!v) return;
+      const miss=e.pts.map((p,k)=>({p,r:v.p[k]})).filter(x=>x.r<1);
+      let l=`س${ei+1}: ${r1(v.m)}/${e.m} ${miss.length?"⚠️ ناقصة":"✅ كاملة"}`;
+      if(miss.length) l+="\n  الناقص:\n"+miss.map(x=>"  • "+x.p.t).join("\n");
+      if(v.f) l+="\n  💬 "+v.f;
+      det.push(l);
+    });
+    if(det.length) parts.push("— تفاصيل المقالي —\n"+det.join("\n"));
+    parts.push("برعاية المطور: "+CONFIG.SPONSOR);
+    let msg=parts.join("\n\n");
+    if(msg.length>1800){ msg=msg.slice(0,1750)+"…\n(التفاصيل كاملة في صفحة نتيجتك على الامتحان)"; }
+    return msg;
+  };
+  $("rv-wa").onclick=()=>{ window.open("https://wa.me/"+toIntl(r.phone||"")+"?text="+encodeURIComponent(buildMsg()),"_blank"); };
+  $("rv-cp").onclick=async()=>{ try{ await navigator.clipboard.writeText(buildMsg()); $("rv-st").className="status ok"; $("rv-st").textContent="✅ تم نسخ الرسالة"; }catch(e){ prompt("انسخ الرسالة:",buildMsg()); } };
   $("rv-ro").onclick=()=>reopenExam(r.user_id);
   $("rv-pdf").onclick=()=>studentPDF(r);
 }
@@ -788,12 +887,12 @@ function studentPDF(r){
   const byQ={}; (r.answers||[]).forEach(a=>{ byQ[a.q]=a.chosen; });
   const bad=Q.map((q,i)=>({i,q,ch:byQ[i+1]??null})).filter(x=>x.ch!==x.q[1]);
   const marks=r.teacher_marks||{};
-  const ess=E.map((e,ei)=>{ const x=(r.essays||[]).find(z=>z.id!=null?z.id===e.n:z.idx===ei); return `<tr><td>${ei+1}</td><td>${esc(e.q)}</td><td>${esc(x?x.text:"")}</td><td>${marks[ei]!=null?marks[ei]:"–"} / ${e.m}</td></tr>`; }).join("");
+  const ess=E.map((e,ei)=>{ const x=(r.essays||[]).find(z=>z.id!=null?z.id===e.n:z.idx===ei); return `<tr><td>${ei+1}</td><td>${esc(e.q)}</td><td>${esc(x?x.text:"")}</td><td>${marks[ei]==null?"–":(typeof marks[ei]==="object"?marks[ei].m:marks[ei])} / ${e.m}</td><td>${esc(typeof marks[ei]==="object"&&marks[ei]?(marks[ei].f||""):"")}</td></tr>`; }).join("");
   printHTML(pdfHead("تقرير الطالب: "+r.student_name)+`<div class="pm">${esc(r.phone||"")}${r.grp?" · "+esc(r.grp):""}</div>
    <p><b>الاختيار:</b> ${r1(+r.mcq_score)} / ${CONFIG.MCQ_MARKS} &nbsp; <b>المقالي:</b> ${graded(r)?r1(+r.teacher_essay_score):"لم يُصحَّح"} / ${CONFIG.ESSAY_MARKS} &nbsp; <b>النهائي:</b> ${graded(r)?r1(fin(r)):"–"} / 100 &nbsp; <b>الوقت:</b> ${mmss(r.time_spent_sec)} &nbsp; <b>خروج:</b> ${r.tab_switches}</p>
    ${r.teacher_note?`<p><b>ملاحظة المدرس:</b> ${esc(r.teacher_note)}</p>`:""}
    <h3>أسئلة الاختيار الغلط أو غير المجابة (${bad.length})</h3><table><tr><th>#</th><th>السؤال</th><th>إجابة الطالب</th><th>الصحيحة</th></tr>${bad.map(x=>`<tr><td>${x.i+1}</td><td>${esc(x.q[0])}</td><td>${x.ch==null?"لم يجب":esc(x.ch)}</td><td>${esc(x.q[1])}</td></tr>`).join("")||'<tr><td colspan="4">لا توجد أخطاء</td></tr>'}</table>
-   <h3>الأسئلة المقالية</h3><table><tr><th>#</th><th>السؤال</th><th>إجابة الطالب</th><th>الدرجة</th></tr>${ess}</table>`);
+   <h3>الأسئلة المقالية</h3><table><tr><th>#</th><th>السؤال</th><th>إجابة الطالب</th><th>الدرجة</th><th>تعليق المدرس</th></tr>${ess}</table>`);
 }
 $("d-pdf").onclick=exportPDF;
 
@@ -852,11 +951,13 @@ $("p-rq").onclick=e=>{
 /* ============ تبويب المدرسين ============ */
 async function loadTeachers(){
   const box=$("p-tc"); box.innerHTML='<div class="card"><div class="status wait">⏳ جاري التحميل...</div></div>';
-  const [a,i]=await Promise.all([sb.from("hx_admins").select("user_id,email").order("email"),sb.from("hx_admin_invites").select("email,created_at").order("created_at",{ascending:false})]);
+  const [a,i,jr]=await Promise.all([sb.from("hx_admins").select("user_id,email").order("email"),sb.from("hx_admin_invites").select("email,created_at").order("created_at",{ascending:false}),sb.from("hx_admin_requests").select("*").order("created_at",{ascending:false}).limit(100)]);
   if(a.error){ box.innerHTML='<div class="card"><div class="status err">'+esc(dbErr(a.error))+"</div></div>"; return; }
-  const admins=a.data||[], inv=i.error?[]:(i.data||[]);
-  box.innerHTML=`<div class="card"><h3 class="gold">➕ إضافة مدرس</h3><div class="sub" style="margin:6px 0 10px">اكتب إيميل المدرس. أول ما يفتح صفحة لوحة التحكم ويسجّل حساب جديد بنفس الإيميل (تبويب «حساب مدرس جديد») بيتفتح له تلقائيًا من غير أي موافقة تانية.</div>
+  const admins=a.data||[], inv=i.error?[]:(i.data||[]), jreq=jr.error?[]:(jr.data||[]);
+  const jpend=jreq.filter(x=>x.status==="pending"); $("t-tc").textContent=jpend.length?"("+jpend.length+")":"";
+  box.innerHTML=`<div class="card"><h3 class="gold">➕ إضافة مدرس</h3><div class="sub" style="margin:6px 0 10px">اكتب إيميل المدرس. لو الإيميل متسجّل قبل كده بيتفتح له فورًا، ولو لسه بيتفتح له تلقائيًا أول ما يسجّل حساب بنفس الإيميل (تبويب «حساب مدرس جديد») من غير أي موافقة تانية.</div>
     <div class="fl"><input id="tc-mail" dir="ltr" placeholder="teacher@gmail.com"><button class="btn" id="tc-add">إضافة</button></div><div id="tc-st"></div></div>
+   <div class="card"><h3 class="gold">📨 طلبات انضمام مدرسين (${jpend.length})</h3><div class="sub" style="margin:6px 0 10px">أي حد يسجّل حساب من صفحة الدخول (تبويب «حساب مدرس جديد») وإيميله مش مضاف، بيقدر يبعت لك طلب هنا، وإنت توافق أو ترفض.</div><div class="tbl" style="max-height:none"><table><tr><th>الإيميل</th><th>وقت الطلب</th><th></th></tr>${jpend.map(x=>`<tr><td dir="ltr">${esc(x.email||"")}</td><td>${new Date(x.created_at).toLocaleString("ar-EG")}</td><td style="white-space:normal"><button class="btn sm" data-aa="${x.id}">✔ موافقة</button> <button class="btn ghost sm" data-ar="${x.id}" style="color:var(--bad);border-color:var(--bad)">✖ رفض</button></td></tr>`).join("")||'<tr><td colspan="3" class="sub">لا توجد طلبات.</td></tr>'}</table></div></div>
    <div class="card"><h3 class="gold">المدرسين الحاليين (${admins.length})</h3><div class="tbl" style="max-height:none"><table><tr><th>الإيميل</th><th></th></tr>${admins.map(x=>`<tr><td dir="ltr">${esc(x.email||"(بدون إيميل مسجّل)")}${x.user_id===ME.id?' <span class="badge b-done">أنت</span>':""}</td><td>${x.user_id===ME.id?"":`<button class="btn ghost sm" data-rma="${x.user_id}" style="color:var(--bad);border-color:var(--bad)">إزالة</button>`}</td></tr>`).join("")}</table></div></div>
    <div class="card"><h3 class="gold">دعوات في الانتظار (${inv.length})</h3><div class="tbl" style="max-height:none"><table><tr><th>الإيميل</th><th>أُضيف في</th><th></th></tr>${inv.map(x=>`<tr><td dir="ltr">${esc(x.email)}</td><td>${new Date(x.created_at).toLocaleString("ar-EG")}</td><td><button class="btn ghost sm" data-rmi="${esc(x.email)}">إلغاء الدعوة</button></td></tr>`).join("")||'<tr><td colspan="3" class="sub">لا توجد دعوات.</td></tr>'}</table></div></div>`;
   $("tc-add").onclick=async()=>{
@@ -867,7 +968,8 @@ async function loadTeachers(){
     setTimeout(loadTeachers,900);
   };
   box.onclick=async e=>{
-    const rma=e.target.closest("[data-rma]"), rmi=e.target.closest("[data-rmi]");
+    const rma=e.target.closest("[data-rma]"), rmi=e.target.closest("[data-rmi]"), aa=e.target.closest("[data-aa]"), ar=e.target.closest("[data-ar]");
+    if(aa||ar){ const id=+(aa||ar).dataset[aa?"aa":"ar"]; const {error}=await sb.rpc("hx_admin_decide_admin_request",{p_id:id,p_approve:!!aa}); if(error){ alert(dbErr(error)); return; } loadTeachers(); return; }
     if(rma){ if(!confirm("تشيل صلاحية المدرس ده؟")) return; const {error}=await sb.rpc("hx_admin_remove_admin",{p_user:rma.dataset.rma}); if(error){ alert(dbErr(error)); return; } loadTeachers(); }
     if(rmi){ const {error}=await sb.rpc("hx_admin_remove_invite",{p_email:rmi.dataset.rmi}); if(error){ alert(dbErr(error)); return; } loadTeachers(); }
   };
