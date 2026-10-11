@@ -285,16 +285,18 @@ select{width:100%;padding:13px 15px;border-radius:14px;border:1.5px solid var(--
   <div class="card">
     <div class="who-row"><div><h2 class="gold">📊 لوحة تحكم المدرس</h2><div class="sub" id="d-upd"></div></div>
       <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn ghost sm" id="d-ref">🔄 تحديث</button><button class="btn ghost sm" id="d-csv">⬇ CSV</button><button class="btn ghost sm" id="d-pdf">📄 PDF</button><button class="btn ghost sm" id="d-wipe" style="color:var(--bad);border-color:var(--bad)">🗑 مسح كل النتائج</button><button class="btn ghost sm" id="d-theme">◐</button><button class="btn ghost sm" id="d-out">خروج</button></div></div>
-    <div class="rt" style="margin:14px 0 0"><button class="tab on" data-tb="p-ov">نظرة عامة</button><button class="tab" data-tb="p-st">الطلاب</button><button class="tab" data-tb="p-gr">تصحيح المقالي <b id="t-gr"></b></button><button class="tab" data-tb="p-rq">الطلبات <b id="t-rq"></b></button><button class="tab" data-tb="p-q">تحليل الأسئلة</button><button class="tab" data-tb="p-tc">المدرسين <b id="t-tc"></b></button></div>
+    <div class="rt" style="margin:14px 0 0"><button class="tab on" data-tb="p-ov">نظرة عامة</button><button class="tab" data-tb="p-st">الطلاب</button><button class="tab" data-tb="p-gr">تصحيح المقالي <b id="t-gr"></b></button><button class="tab" data-tb="p-rq">الطلبات <b id="t-rq"></b></button><button class="tab" data-tb="p-q">تحليل الأسئلة</button><button class="tab" data-tb="p-cn">السنتر <b id="t-cn"></b></button><button class="tab" data-tb="p-tc">المدرسين <b id="t-tc"></b></button></div>
   </div>
+  <div id="d-health" class="status err hide"></div>
   <div id="p-ov"></div>
   <div id="p-st" class="hide">
-    <div class="card"><div class="fl"><input id="f-q" placeholder="بحث بالاسم أو الموبايل"><select id="f-s"><option value="">كل الحالات</option><option value="done">سلّم</option><option value="prog">جاري</option><option value="none">لم يبدأ</option></select><select id="f-g"><option value="">كل المجموعات</option></select><select id="f-o"><option value="top">الأعلى درجة</option><option value="low">الأقل درجة</option><option value="new">الأحدث</option><option value="name">الاسم</option><option value="flag">الأكثر خروجًا</option></select></div></div>
+    <div class="card"><div class="fl"><input id="f-q" placeholder="بحث بالاسم أو الموبايل"><select id="f-s"><option value="">كل الحالات</option><option value="done">سلّم</option><option value="prog">جاري</option><option value="none">لم يبدأ</option></select><select id="f-g"><option value="">كل المجموعات</option></select><select id="f-c"><option value="">كل الطلاب</option><option value="in">طلاب السنتر فقط</option><option value="out">خارج السنتر</option></select><select id="f-o"><option value="top">الأعلى درجة</option><option value="low">الأقل درجة</option><option value="new">الأحدث</option><option value="name">الاسم</option><option value="flag">الأكثر خروجًا</option></select></div></div>
     <div class="card tbl"><table id="d-t"></table></div>
   </div>
   <div id="p-gr" class="hide"></div>
   <div id="p-rq" class="hide"></div>
   <div id="p-q" class="hide"></div>
+  <div id="p-cn" class="hide"></div>
   <div id="p-tc" class="hide"></div>
   <div class="foot"><div class="sponsor"><i>✦</i> برعاية المطور : <b>محمد رمضان الحرباوي</b> <i>•</i> <b>أستاذ محمد حمدي الرفاعي</b> <i>✦</i></div><div><a class="devwa" href="https://wa.me/201500492203" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"  aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg> تواصل مع المطور على واتساب · 01500492203</a></div></div>
 </div>
@@ -309,7 +311,7 @@ const CONFIG={
   SUPABASE_KEY:"sb_publishable_5EloXpKtnM55jZsAvWhi7A_r05H8ODK",
   TABLE:"hx_results",
   EXAM_ID:"history-2b-2027-t1-unit1-v3",
-  MCQ_MARKS:50, ESSAY_MARKS:50, MIN_WORDS:4, DURATION_MIN:90,
+  MCQ_MARKS:50, ESSAY_MARKS:50, MIN_WORDS:4, DURATION_MIN:200,
   SPONSOR:"محمد رمضان الحرباوي • أستاذ محمد حمدي الرفاعي"
 };
 const LESSONS = ["الدرس 1: بناء الدولة المصرية واستمراريتها","الدرس 2: الدولة القديمة ومقاومة الاحتلال","الدرس 3: التحولات الكبرى – العصر الوسيط","الدرس 4: التحولات الكبرى – العصر الحديث"];
@@ -525,7 +527,7 @@ const memStore={};
 const safeStorage={getItem:k=>{try{return localStorage.getItem(k)}catch(e){return memStore[k]??null}},setItem:(k,v)=>{try{localStorage.setItem(k,v)}catch(e){memStore[k]=v}},removeItem:k=>{try{localStorage.removeItem(k)}catch(e){delete memStore[k]}}};
 const isNetErr=m=>/Failed to fetch|NetworkError|Load failed|network request|fetch failed/i.test(String(m||""));
 const NET_HELP="تعذر الاتصال بالسيرفر. الأسباب المحتملة: (1) الصفحة مفتوحة من داخل معاينة أو تطبيق، افتحها من متصفح عادي أو من رابط https مستضاف (Netlify / GitHub Pages / Vercel). (2) مفيش إنترنت أو في VPN أو حاجب إعلانات بيحجب supabase.co. (3) مشروع Supabase متوقف (Paused)، افتح لوحة Supabase واضغط Restore.";
-const dbErr=e=>{ const m=(e&&e.message)||String(e); if(isNetErr(m)) return NET_HELP; if((e&&e.code==="PGRST202")||/Could not find the function/i.test(m)) return "ميزة ناقصة في قاعدة البيانات: شغّل ملف supabase_setup.sql الجديد في Supabase ثم أعد المحاولة."; if((e&&e.code==="PGRST205")||/schema cache|does not exist|Could not find/i.test(m)) return "قاعدة البيانات لسه مش مجهزة: شغّل ملف supabase_setup.sql في Supabase SQL Editor."; if(/42501|row-level security|permission denied/i.test(m)) return "صلاحيات قاعدة البيانات ناقصة: أعد تشغيل ملف supabase_setup.sql."; return m; };
+const dbErr=e=>{ const m=(e&&e.message)||String(e); if(isNetErr(m)) return NET_HELP; if((e&&e.code==="PGRST202")||/Could not find the function/i.test(m)) return "الدالة مش ظاهرة لـ Supabase. شغّل ملف supabase_setup.sql كامل في SQL Editor (آخره بيحدّث الـ API ويعرض جدول فحص كله OK)، واستنى 10 ثواني وأعد المحاولة."; if((e&&e.code==="PGRST205")||/schema cache|does not exist|Could not find/i.test(m)) return "قاعدة البيانات لسه مش مجهزة: شغّل ملف supabase_setup.sql في Supabase SQL Editor."; if(/42501|row-level security|permission denied/i.test(m)) return "صلاحيات قاعدة البيانات ناقصة: أعد تشغيل ملف supabase_setup.sql."; return m; };
 async function ping(){ try{ const c=new AbortController(); const t=setTimeout(()=>c.abort(),9000); await fetch(CONFIG.SUPABASE_URL+"/auth/v1/health",{headers:{apikey:CONFIG.SUPABASE_KEY},signal:c.signal}); clearTimeout(t); return "ok"; }catch(e){ return "net"; } }
 function setConn(st,msg){
   const c=$("conn"); if(!c) return;
@@ -612,28 +614,30 @@ async function enter(user){
   const {data:adm,error}=await sb.from("hx_admins").select("user_id").eq("user_id",user.id).maybeSingle();
   if(error) throw error;
   if(!adm){ return offerClaim(user); }
-  ME=user; show("s-dash"); await loadAll();
+  ME=user; show("s-dash"); checkHealth(); await loadAll();
   clearInterval(AUTO); AUTO=setInterval(()=>{ if(!document.hidden&&ME) loadAll(true); },30000);
 }
 $("d-out").onclick=async()=>{ try{await sb.auth.signOut()}catch(e){} location.reload(); };
 
 /* ============ تحميل البيانات ============ */
-let ROWS=[], RES=[], REQ=[];
+let ROWS=[], RES=[], REQ=[], CEN=[];
 const fin=r=>(+r.mcq_score||0)+(r.teacher_essay_score!=null?+r.teacher_essay_score:(+r.essay_score||0));
 const graded=r=>r.teacher_essay_score!=null;
 async function loadAll(silent){
   if(!silent) $("p-ov").innerHTML='<div class="card"><div class="status wait">⏳ جاري تحميل البيانات...</div></div>';
-  const [p,s,r,rq]=await Promise.all([
+  const [p,s,r,rq,cn]=await Promise.all([
     sb.from("hx_profiles").select("id,full_name,phone,grp,created_at").order("created_at",{ascending:false}).limit(3000),
     sb.from("hx_sessions").select("user_id,started_at,progress").eq("exam_id",CONFIG.EXAM_ID).limit(3000),
     sb.from(CONFIG.TABLE).select("id,user_id,student_name,phone,grp,mcq_score,essay_score,teacher_essay_score,time_spent_sec,tab_switches,auto_submitted,created_at,lessons,answers,late,closed_by_admin").eq("exam_id",CONFIG.EXAM_ID).limit(3000),
-    sb.from("hx_requests").select("*").eq("exam_id",CONFIG.EXAM_ID).order("created_at",{ascending:false}).limit(1000)
+    sb.from("hx_requests").select("*").eq("exam_id",CONFIG.EXAM_ID).order("created_at",{ascending:false}).limit(1000),
+    sb.from("hx_center").select("*").order("created_at",{ascending:false}).limit(5000)
   ]);
   const err=p.error||s.error||r.error;
   if(err){ $("p-ov").innerHTML='<div class="card"><div class="status err">'+esc(err.message)+'</div></div>'; return; }
-  RES=r.data||[]; REQ=rq.error?[]:(rq.data||[]);
+  RES=r.data||[]; REQ=rq.error?[]:(rq.data||[]); CEN=cn.error?[]:(cn.data||[]);
   const rb=Object.fromEntries(RES.map(x=>[x.user_id,x])), sbm=Object.fromEntries((s.data||[]).map(x=>[x.user_id,x]));
   ROWS=(p.data||[]).map(x=>{ const res=rb[x.id], se=sbm[x.id]; return {uid:x.id,name:x.full_name,phone:x.phone,grp:x.grp||"",joined:x.created_at,st:res?"done":se?"prog":"none",res,started:se?.started_at,prog:se?.progress}; });
+  const cm=new Map(CEN.map(c=>[c.phone,c])); ROWS.forEach(x=>{ x.cen=cm.get(x.phone)||null; });
   const gs=[...new Set(ROWS.map(x=>x.grp).filter(Boolean))].sort();
   $("f-g").innerHTML='<option value="">كل المجموعات</option>'+gs.map(g=>`<option>${esc(g)}</option>`).join("");
   $("d-upd").textContent="آخر تحديث: "+new Date().toLocaleTimeString("ar-EG");
@@ -642,10 +646,10 @@ async function loadAll(silent){
 $("d-ref").onclick=loadAll;
 document.querySelectorAll("[data-tb]").forEach(b=>b.onclick=()=>{
   document.querySelectorAll("[data-tb]").forEach(x=>x.classList.toggle("on",x===b));
-  ["p-ov","p-st","p-gr","p-rq","p-q","p-tc"].forEach(id=>$(id).classList.toggle("hide",id!==b.dataset.tb));
+  ["p-ov","p-st","p-gr","p-rq","p-q","p-cn","p-tc"].forEach(id=>$(id).classList.toggle("hide",id!==b.dataset.tb));
   if(b.dataset.tb==="p-tc") loadTeachers();
 });
-function drawAll(){ drawOverview(); drawStudents(); drawGrading(); drawRequests(); drawQuestions(); refreshTcBadge(); }
+function drawAll(){ drawOverview(); drawStudents(); drawGrading(); drawRequests(); drawQuestions(); drawCenter(); refreshTcBadge(); }
 async function refreshTcBadge(){ try{ const r=await sb.from("hx_admin_requests").select("id").eq("status","pending"); if(!r.error) $("t-tc").textContent=(r.data&&r.data.length)?"("+r.data.length+")":""; }catch(e){} }
 
 /* ============ نظرة عامة ============ */
@@ -673,8 +677,8 @@ function drawOverview(){
 /* ============ الطلاب ============ */
 const STL={done:'<span class="badge b-done">سلّم</span>',prog:'<span class="badge b-prog">جاري</span>',none:'<span class="badge b-none">لم يبدأ</span>'};
 function filtered(){
-  const q=norm($("f-q").value||""), st=$("f-s").value, g=$("f-g").value, o=$("f-o").value;
-  let L=ROWS.filter(x=>(!q||norm(x.name+" "+x.phone).includes(q))&&(!st||x.st===st)&&(!g||x.grp===g));
+  const q=norm($("f-q").value||""), st=$("f-s").value, g=$("f-g").value, o=$("f-o").value, cf=$("f-c").value;
+  let L=ROWS.filter(x=>(!q||norm(x.name+" "+x.phone).includes(q))&&(!st||x.st===st)&&(!g||x.grp===g)&&(!cf||(cf==="in"?!!x.cen:!x.cen)));
   const sv=x=>x.st==="done"?fin(x.res):-1;
   L.sort(o==="low"?(a,b)=>(a.st==="done"?sv(a):999)-(b.st==="done"?sv(b):999):o==="new"?(a,b)=>new Date(b.joined)-new Date(a.joined):o==="name"?(a,b)=>a.name.localeCompare(b.name,"ar"):o==="flag"?(a,b)=>(b.res?.tab_switches||0)-(a.res?.tab_switches||0):(a,b)=>sv(b)-sv(a));
   return L;
@@ -699,21 +703,23 @@ function drawStudents(){
       `<button class="btn wa sm" data-wa="${x.uid}" title="واتساب">💬</button>`,
       !r?`<button class="btn ghost sm" data-cl="${x.uid}" style="color:var(--bad);border-color:var(--bad)">إغلاق الامتحان</button>`:"",
       x.st!=="none"?`<button class="btn ghost sm" data-ro="${x.uid}">محاولة جديدة</button>`:"",
+      !x.cen?`<button class="btn ghost sm" data-ac="${x.uid}">➕ للسنتر</button>`:"",
       `<button class="btn ghost sm" data-dl="${x.uid}" style="color:var(--bad);border-color:var(--bad)">حذف</button>`
     ].join("");
-    return `<tr><td>${i+1}</td><td><b>${esc(x.name)}</b></td><td dir="ltr">${esc(x.phone)}</td><td>${esc(x.grp)}</td><td>${st}</td>${mid}<td><div style="display:flex;gap:6px;flex-wrap:wrap;max-width:240px;white-space:normal">${act}</div></td></tr>`;
+    return `<tr><td>${i+1}</td><td><b>${esc(x.name)}</b>${x.cen?' <span class="badge b-done">سنتر'+(x.cen.center?": "+esc(x.cen.center):"")+"</span>":""}</td><td dir="ltr">${esc(x.phone)}</td><td>${esc(x.grp)}</td><td>${st}</td>${mid}<td><div style="display:flex;gap:6px;flex-wrap:wrap;max-width:240px;white-space:normal">${act}</div></td></tr>`;
   }).join("")||'<tr><td colspan="11" class="sub">لا يوجد طلاب مطابقين.</td></tr>';
 }
-["f-q","f-s","f-g","f-o"].forEach(id=>{ $(id).oninput=drawStudents; $(id).onchange=drawStudents; });
+["f-q","f-s","f-g","f-c","f-o"].forEach(id=>{ $(id).oninput=drawStudents; $(id).onchange=drawStudents; });
 $("d-t").onclick=e=>{
   const g=a=>e.target.closest("["+a+"]");
-  const rv=g("data-rv"), lv=g("data-lv"), wa=g("data-wa"), cl=g("data-cl"), ro=g("data-ro"), dl=g("data-dl");
+  const rv=g("data-rv"), lv=g("data-lv"), wa=g("data-wa"), cl=g("data-cl"), ro=g("data-ro"), dl=g("data-dl"), ac=g("data-ac");
   if(rv) reviewRow(rv.dataset.rv);
   if(lv) reviewLive(lv.dataset.lv);
   if(wa){ const x=ROWS.find(y=>y.uid===wa.dataset.wa); window.open("https://wa.me/"+toIntl(x.phone),"_blank"); }
   if(cl) closeExam(cl.dataset.cl);
   if(ro) reopenExam(ro.dataset.ro);
   if(dl) deleteMenu(dl.dataset.dl);
+  if(ac) addToCenter(ac.dataset.ac);
 };
 async function closeExam(uid){
   const x=ROWS.find(y=>y.uid===uid);
@@ -973,6 +979,121 @@ async function loadTeachers(){
     if(rma){ if(!confirm("تشيل صلاحية المدرس ده؟")) return; const {error}=await sb.rpc("hx_admin_remove_admin",{p_user:rma.dataset.rma}); if(error){ alert(dbErr(error)); return; } loadTeachers(); }
     if(rmi){ const {error}=await sb.rpc("hx_admin_remove_invite",{p_email:rmi.dataset.rmi}); if(error){ alert(dbErr(error)); return; } loadTeachers(); }
   };
+}
+
+/* ============ فحص جاهزية قاعدة البيانات ============ */
+async function checkHealth(){
+  const box=$("d-health"); box.classList.add("hide");
+  let ref="?"; try{ ref=new URL(CONFIG.SUPABASE_URL).hostname.split(".")[0]; }catch(e){}
+  const {data,error}=await sb.rpc("hx_health");
+  if(error){
+    box.className="status err"; box.innerHTML='⚠️ قاعدة البيانات مش جاهزة بالكامل على مشروع <b dir="ltr">'+esc(ref)+'</b>. افتح <b>نفس المشروع ده</b> في Supabase ← SQL Editor، وشغّل ملف supabase_setup.sql كامل مرة واحدة، وبعدها حدّث الصفحة.';
+    return;
+  }
+  if(data&&data.length){
+    box.className="status err"; box.innerHTML='⚠️ ناقص في قاعدة البيانات (مشروع <b dir="ltr">'+esc(ref)+'</b>): <span dir="ltr">'+data.map(esc).join(", ")+'</span> — شغّل ملف supabase_setup.sql كامل.';
+  }
+}
+
+/* ============ تبويب السنتر ============ */
+const EXLINK_KEY="hx-exam-link";
+let CN_MSG=null;
+const dig=t=>String(t).replace(/[٠-٩]/g,d=>"٠١٢٣٤٥٦٧٨٩".indexOf(d));
+function parseRoster(txt,center){
+  const rows=[]; let skipped=0;
+  dig(txt).split(/\n+/).forEach(line=>{
+    if(!line.trim()) return;
+    const m=line.match(/(?:\+?20)?0?1[0125]\d{8}/);
+    if(!m){ skipped++; return; }
+    const name=line.replace(m[0]," ").replace(/[,،;:|\t\-–—_]+/g," ").replace(/\s+/g," ").trim();
+    if(!name){ skipped++; return; }
+    rows.push({name,phone:m[0],center:center||null});
+  });
+  return {rows,skipped};
+}
+function cenStatus(c){
+  const x=ROWS.find(r=>r.phone===c.phone);
+  if(!x) return {k:"noacc",label:"لم يسجّل حساب",cls:"b-none",x:null};
+  if(x.st==="done") return {k:"done",label:"سلّم",cls:"b-done",x};
+  if(x.st==="prog") return {k:"prog",label:"جاري",cls:"b-prog",x};
+  return {k:"reg",label:"مسجّل ولم يبدأ",cls:"b-prog",x};
+}
+function cenList(){
+  const q=norm(($("cn-q")&&$("cn-q").value)||""), f=($("cn-f")&&$("cn-f").value)||"", ce=($("cn-c")&&$("cn-c").value)||"";
+  return CEN.map(c=>({c,s:cenStatus(c)})).filter(o=>(!q||norm(o.c.full_name+" "+o.c.phone).includes(q))&&(!ce||o.c.center===ce)&&(!f||(f==="notdone"?o.s.k!=="done":o.s.k===f)));
+}
+function drawCenter(){
+  const all=CEN.map(c=>({c,s:cenStatus(c)})), n=all.length;
+  const cnt=k=>all.filter(o=>o.s.k===k).length, notdone=n-cnt("done");
+  $("t-cn").textContent=notdone?"("+notdone+")":"";
+  const keep={q:($("cn-q")||{}).value||"",f:($("cn-f")||{}).value||"",c:($("cn-c")||{}).value||"",b:($("cn-bulk")||{}).value||"",bc:($("cn-center")||{}).value||""};
+  const centers=[...new Set(CEN.map(c=>c.center).filter(Boolean))].sort();
+  let link=""; try{ link=localStorage.getItem(EXLINK_KEY)||""; }catch(e){}
+  $("p-cn").innerHTML=`
+   <div class="card"><h3 class="gold" style="margin-bottom:10px">طلاب السنتر</h3>
+    <div class="stats s5">${card(n,"إجمالي طلاب السنتر")}${card(cnt("done"),"سلّموا الامتحان","var(--ok)")}${card(cnt("prog"),"جاري امتحانهم","var(--warn)")}${card(cnt("reg"),"مسجّلين ولم يبدأوا","var(--warn)")}${card(cnt("noacc"),"لم يسجّلوا حساب","var(--bad)")}</div>
+    <div class="lbar" style="margin-top:12px"><i style="width:${n?cnt("done")/n*100:0}%;background:var(--ok)"></i></div><div class="sub" style="margin-top:4px">${n?Math.round(cnt("done")/n*100):0}% من طلاب السنتر سلّموا</div></div>
+   <div class="card"><h3 class="gold">➕ إضافة طلاب للسنتر</h3>
+    <div class="sub" style="margin:6px 0 10px">الصق قايمة الطلاب، كل طالب في سطر: الاسم والموبايل (بأي ترتيب). مثال: <span dir="ltr">أحمد محمد علي 01012345678</span>. تقدر تنسخها من إكسل أو واتساب.</div>
+    <textarea id="cn-bulk" placeholder="أحمد محمد علي حسن 01012345678&#10;سارة خالد حسن علي، 01112345678" style="min-height:110px"></textarea>
+    <div class="fl" style="margin-top:10px"><input id="cn-center" placeholder="اسم السنتر / المجموعة (اختياري)"><button class="btn" id="cn-add">إضافة للسنتر</button></div><div id="cn-st" class="${CN_MSG?CN_MSG.c:""}">${CN_MSG?esc(CN_MSG.t):""}</div></div>
+   <div class="card"><div class="fl"><input id="cn-q" placeholder="بحث بالاسم أو الموبايل"><select id="cn-f"><option value="">كل الحالات</option><option value="notdone">لم يسلّموا (كل اللي مسلّمش)</option><option value="done">سلّموا</option><option value="prog">جاري</option><option value="reg">مسجّلين ولم يبدأوا</option><option value="noacc">لم يسجّلوا حساب</option></select><select id="cn-c"><option value="">كل السناتر</option>${centers.map(x=>`<option>${esc(x)}</option>`).join("")}</select></div>
+    <div class="fl" style="margin-top:10px"><input id="cn-link" dir="ltr" placeholder="رابط الامتحان (بيتحط في رسالة التذكير)" value="${esc(link)}"><button class="btn ghost" id="cn-csv">⬇ CSV</button><button class="btn ghost" id="cn-pdf">📄 PDF</button><button class="btn wa" id="cn-remind">📲 تذكير اللي لم يسلّموا</button></div></div>
+   <div class="card tbl"><table id="cn-t"></table></div>`;
+  $("cn-q").value=keep.q; $("cn-f").value=keep.f; $("cn-c").value=keep.c; $("cn-bulk").value=keep.b; $("cn-center").value=keep.bc;
+  drawCenterTable();
+  $("cn-q").oninput=drawCenterTable; $("cn-f").onchange=drawCenterTable; $("cn-c").onchange=drawCenterTable;
+  $("cn-link").oninput=()=>{ try{ localStorage.setItem(EXLINK_KEY,$("cn-link").value.trim()); }catch(e){} };
+  $("cn-add").onclick=async()=>{
+    const {rows,skipped}=parseRoster($("cn-bulk").value,$("cn-center").value.trim());
+    const st=$("cn-st");
+    if(!rows.length){ st.className="status err"; st.textContent="مفيش سطور صالحة. اكتب الاسم ورقم الموبايل في كل سطر."; return; }
+    const {data,error}=await sb.rpc("hx_admin_center_add",{p_rows:rows});
+    if(error){ st.className="status err"; st.textContent=dbErr(error); return; }
+    CN_MSG={c:"status ok",t:"✅ تمت إضافة/تحديث "+data+" طالب"+(skipped?" — وتم تجاهل "+skipped+" سطر غير صالح":"")};
+    $("cn-bulk").value=""; await loadAll(true);
+  };
+  $("cn-csv").onclick=()=>{
+    const SL={noacc:"لم يسجّل حساب",reg:"مسجّل ولم يبدأ",prog:"جاري",done:"سلّم"};
+    const rows=[["الاسم","الموبايل","السنتر","حالة الحساب/الامتحان","الاختيار","المقالي","النهائي"]].concat(cenList().map(o=>{ const r=o.s.x&&o.s.x.res; return [o.c.full_name,o.c.phone,o.c.center||"",SL[o.s.k],r?r.mcq_score:"",r?(graded(r)?r.teacher_essay_score:"لم يُصحَّح"):"",r&&graded(r)?r1(fin(r)):""]; }));
+    const csv="\ufeff"+rows.map(r=>r.map(c=>'"'+String(c??"").replace(/"/g,'""')+'"').join(",")).join("\n");
+    const a=document.createElement("a"); a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv;charset=utf-8"})); a.download="center-"+CONFIG.EXAM_ID+".csv"; a.click();
+  };
+  $("cn-pdf").onclick=()=>{
+    const L=cenList(), fv=$("cn-f").value;
+    const rows=L.map((o,i)=>{ const r=o.s.x&&o.s.x.res; return `<tr><td>${i+1}</td><td>${esc(o.c.full_name)}</td><td dir="ltr">${esc(o.c.phone)}</td><td>${esc(o.c.center||"")}</td><td>${o.s.label}</td><td>${r?r1(+r.mcq_score):"–"}</td><td>${r&&graded(r)?r1(fin(r)):"–"}</td></tr>`; }).join("");
+    printHTML(pdfHead("كشف طلاب السنتر"+(fv?" — "+({notdone:"اللي لم يسلّموا",done:"اللي سلّموا",prog:"الجاري",reg:"المسجّلين ولم يبدأوا",noacc:"اللي لم يسجّلوا"}[fv]||""):""))+`<div class="pm">العدد: ${L.length}</div><table><tr><th>#</th><th>الاسم</th><th>الموبايل</th><th>السنتر</th><th>الحالة</th><th>الاختيار /50</th><th>النهائي /100</th></tr>${rows}</table>`);
+  };
+  $("cn-remind").onclick=()=>{
+    const L=cenList().filter(o=>o.s.k!=="done");
+    if(!L.length){ alert("كل الطلاب في القايمة الحالية سلّموا 🎉"); return; }
+    if(!confirm("هيتفتح واتساب لـ "+L.length+" طالب (واحد ورا التاني). تكمّل؟")) return;
+    const lk=$("cn-link").value.trim();
+    L.forEach((o,i)=>setTimeout(()=>{
+      const msg="السلام عليكم "+o.c.full_name+"،\nلسه ما سلّمتش امتحان التاريخ – الوحدة الأولى."+(o.s.k==="noacc"?"\nسجّل حساب برقم موبايلك ده وابدأ الامتحان.":"")+(lk?"\nرابط الامتحان: "+lk:"")+"\n\nبرعاية المطور: "+CONFIG.SPONSOR;
+      window.open("https://wa.me/"+toIntl(o.c.phone)+"?text="+encodeURIComponent(msg),"_blank");
+    },i*700));
+  };
+}
+function drawCenterTable(){
+  const L=cenList();
+  $("cn-t").innerHTML="<tr><th>#</th><th>الاسم</th><th>الموبايل</th><th>السنتر</th><th>الحالة</th><th>اختيار</th><th>النهائي</th><th>إجراءات</th></tr>"+
+   (L.map((o,i)=>{ const r=o.s.x&&o.s.x.res;
+     return `<tr><td>${i+1}</td><td><b>${esc(o.c.full_name)}</b></td><td dir="ltr">${esc(o.c.phone)}</td><td>${esc(o.c.center||"")}</td><td>${bdg(o.s.label,o.s.cls)}</td><td>${r?r1(+r.mcq_score):"–"}</td><td>${r?(graded(r)?"<b>"+r1(fin(r))+"</b>":'<span class="badge b-prog">لم يُصحَّح</span>'):"–"}</td><td><div style="display:flex;gap:6px;flex-wrap:wrap;white-space:normal">${r?`<button class="btn ghost sm" data-crv="${r.id}">${graded(r)?"مراجعة":"تصحيح"}</button>`:""}<button class="btn wa sm" data-cwa="${o.c.id}" title="تذكير واتساب">💬</button><button class="btn ghost sm" data-crm="${o.c.id}" style="color:var(--bad);border-color:var(--bad)">إزالة</button></div></td></tr>`; }).join("")||'<tr><td colspan="8" class="sub">القايمة فاضية. أضف طلاب السنتر من فوق.</td></tr>');
+}
+$("p-cn").onclick=async e=>{
+  const crv=e.target.closest("[data-crv]"), cwa=e.target.closest("[data-cwa]"), crm=e.target.closest("[data-crm]");
+  if(crv) reviewRow(crv.dataset.crv);
+  if(cwa){ const c=CEN.find(x=>String(x.id)===cwa.dataset.cwa); const s=cenStatus(c); const lk=($("cn-link")||{value:""}).value.trim();
+    const msg="السلام عليكم "+c.full_name+"،\n"+(s.k==="done"?"نتيجة امتحان التاريخ – الوحدة الأولى جاهزة، ادخل صفحة الامتحان بحسابك تشوفها.":"لسه ما سلّمتش امتحان التاريخ – الوحدة الأولى."+(s.k==="noacc"?"\nسجّل حساب برقم موبايلك ده وابدأ الامتحان.":""))+(lk?"\nالرابط: "+lk:"")+"\n\nبرعاية المطور: "+CONFIG.SPONSOR;
+    window.open("https://wa.me/"+toIntl(c.phone)+"?text="+encodeURIComponent(msg),"_blank"); }
+  if(crm){ const c=CEN.find(x=>String(x.id)===crm.dataset.crm); if(!confirm("تشيل «"+c.full_name+"» من قايمة السنتر؟ (حسابه ونتيجته مش بيتأثروا)")) return; const {error}=await sb.rpc("hx_admin_center_remove",{p_id:c.id}); if(error){ alert(dbErr(error)); return; } await loadAll(true); }
+};
+async function addToCenter(uid){
+  const x=ROWS.find(y=>y.uid===uid);
+  const {error}=await sb.rpc("hx_admin_center_add",{p_rows:[{name:x.name,phone:x.phone,center:x.grp||null}]});
+  if(error){ alert(dbErr(error)); return; }
+  await loadAll(true);
 }
 
 /* ============ تحليل الأسئلة ============ */
