@@ -226,23 +226,42 @@ select{width:100%;padding:13px 15px;border-radius:14px;border:1.5px solid var(--
 .eye{position:absolute;left:8px;top:50%;transform:translateY(-50%);background:none;border:0;color:var(--mute);font-size:18px;cursor:pointer;padding:6px}.eye.r{left:auto;right:8px}
 .btn.busy{pointer-events:none;opacity:.8}.btn.busy:after{content:"";width:16px;height:16px;border:2.5px solid currentColor;border-top-color:transparent;border-radius:50%;animation:spin .7s linear infinite;display:inline-block}
 @keyframes spin{to{transform:rotate(360deg)}}
+.modal .card.wide .card{max-width:none;width:auto;margin:0 0 16px}
+.modal .card.wide .tbl{max-width:100%}
+
+#print-area{display:none}
+@media print{
+ body.printing>*:not(#print-area){display:none!important}
+ body.printing #print-area{display:block!important;background:#fff;color:#111;direction:rtl;font-family:'Cairo',system-ui,sans-serif}
+ body.printing{background:#fff!important}
+ #print-area h1{font-size:20px;margin:0 0 4px;color:#111}#print-area h3{margin:14px 0 6px;color:#111}
+ #print-area .pm{color:#555;font-size:12px;margin-bottom:8px}
+ #print-area table{width:100%;border-collapse:collapse;font-size:12px}
+ #print-area th,#print-area td{border:1px solid #bbb;padding:4px 6px;text-align:right;vertical-align:top}
+ #print-area th{background:#eee}
+ #print-area .sp{border:1px solid #c99a2c;border-radius:99px;display:inline-block;padding:2px 14px;font-weight:700;color:#7a5610;margin-bottom:8px}
+}
+.em{max-width:150px}
+#s-dash.wrap{max-width:1240px}
+.tbl td .btn.sm{padding:6px 10px;font-size:13px}
 </style>
 </head>
 <body>
 <div class="orbs"><i></i><i></i><i></i></div>
-<div class="topban">✦ برعاية المطور : محمد رمضان الحرباوي • أستاذ محمد حمدي البرهومي ✦</div>
+<div class="topban">✦ برعاية المطور : محمد رمضان الحرباوي • أستاذ محمد حمدي الرفاعي ✦</div>
 <a class="wa-float" href="https://wa.me/201500492203?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%B9%D9%86%20%D9%86%D8%B8%D8%A7%D9%85%20%D8%A7%D9%84%D8%A7%D9%85%D8%AA%D8%AD%D8%A7%D9%86" target="_blank" rel="noopener" aria-label="تواصل مع المطور على واتساب" title="تواصل مع المطور على واتساب"><svg viewBox="0 0 24 24" width="30" height="30" fill="#fff" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg><span>تواصل مع المطور</span></a>
 
 <!-- ===== دخول الأدمن ===== -->
 <div id="s-auth" class="wrap">
   <div class="hero">
-    <div class="sponsor"><i>✦</i> برعاية المطور : <b>محمد رمضان الحرباوي</b> <i>•</i> <b>أستاذ محمد حمدي البرهومي</b> <i>✦</i></div>
+    <div class="sponsor"><i>✦</i> برعاية المطور : <b>محمد رمضان الحرباوي</b> <i>•</i> <b>أستاذ محمد حمدي الرفاعي</b> <i>✦</i></div>
     <svg class="pyr" viewBox="0 0 200 110" aria-hidden="true"><polygon points="100,8 168,100 32,100" fill="#e5bd5a"/><polygon points="100,8 168,100 100,100" fill="rgba(0,0,0,.2)"/><polygon points="150,48 196,100 120,100" fill="#e5bd5a" opacity=".7"/><polygon points="52,60 92,100 12,100" fill="#e5bd5a" opacity=".55"/></svg>
     <h1 class="gold">لوحة تحكم المدرس</h1>
     <div class="sub">صفحة خاصة بالمدرس فقط · الطلاب والدرجات والإحصائيات</div>
   </div>
   <div class="card authcard" style="max-width:440px;margin:0 auto">
     <div class="conn" id="conn">⏳ جاري فحص الاتصال بالسيرفر...</div>
+    <div class="rt"><button class="tab on" data-am="login">دخول</button><button class="tab" data-am="signup">حساب مدرس جديد</button></div>
     <label for="a-user">إيميل حساب المدرس (اللي أنشأته في Supabase)</label><input id="a-user" autocomplete="username" placeholder="teacher@gmail.com" dir="ltr">
     <label for="a-pass">كلمة السر</label><div style="position:relative"><input id="a-pass" type="password" autocomplete="current-password" dir="ltr"><button type="button" class="eye r" id="a-eye" aria-label="إظهار كلمة السر">👁</button></div>
     <div id="a-err" class="status err hide"></div>
@@ -256,18 +275,22 @@ select{width:100%;padding:13px 15px;border-radius:14px;border:1.5px solid var(--
 <div id="s-dash" class="wrap hide">
   <div class="card">
     <div class="who-row"><div><h2 class="gold">📊 لوحة تحكم المدرس</h2><div class="sub" id="d-upd"></div></div>
-      <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn ghost sm" id="d-ref">🔄 تحديث</button><button class="btn ghost sm" id="d-csv">⬇ تصدير CSV</button><button class="btn ghost sm" id="d-theme">◐</button><button class="btn ghost sm" id="d-out">خروج</button></div></div>
-    <div class="rt" style="margin:14px 0 0"><button class="tab on" data-tb="p-ov">نظرة عامة</button><button class="tab" data-tb="p-st">الطلاب</button><button class="tab" data-tb="p-q">تحليل الأسئلة</button></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn ghost sm" id="d-ref">🔄 تحديث</button><button class="btn ghost sm" id="d-csv">⬇ CSV</button><button class="btn ghost sm" id="d-pdf">📄 PDF</button><button class="btn ghost sm" id="d-wipe" style="color:var(--bad);border-color:var(--bad)">🗑 مسح كل النتائج</button><button class="btn ghost sm" id="d-theme">◐</button><button class="btn ghost sm" id="d-out">خروج</button></div></div>
+    <div class="rt" style="margin:14px 0 0"><button class="tab on" data-tb="p-ov">نظرة عامة</button><button class="tab" data-tb="p-st">الطلاب</button><button class="tab" data-tb="p-gr">تصحيح المقالي <b id="t-gr"></b></button><button class="tab" data-tb="p-rq">الطلبات <b id="t-rq"></b></button><button class="tab" data-tb="p-q">تحليل الأسئلة</button><button class="tab" data-tb="p-tc">المدرسين</button></div>
   </div>
   <div id="p-ov"></div>
   <div id="p-st" class="hide">
     <div class="card"><div class="fl"><input id="f-q" placeholder="بحث بالاسم أو الموبايل"><select id="f-s"><option value="">كل الحالات</option><option value="done">سلّم</option><option value="prog">جاري</option><option value="none">لم يبدأ</option></select><select id="f-g"><option value="">كل المجموعات</option></select><select id="f-o"><option value="top">الأعلى درجة</option><option value="low">الأقل درجة</option><option value="new">الأحدث</option><option value="name">الاسم</option><option value="flag">الأكثر خروجًا</option></select></div></div>
     <div class="card tbl"><table id="d-t"></table></div>
   </div>
+  <div id="p-gr" class="hide"></div>
+  <div id="p-rq" class="hide"></div>
   <div id="p-q" class="hide"></div>
-  <div class="foot"><div class="sponsor"><i>✦</i> برعاية المطور : <b>محمد رمضان الحرباوي</b> <i>•</i> <b>أستاذ محمد حمدي البرهومي</b> <i>✦</i></div><div><a class="devwa" href="https://wa.me/201500492203" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"  aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg> تواصل مع المطور على واتساب · 01500492203</a></div></div>
+  <div id="p-tc" class="hide"></div>
+  <div class="foot"><div class="sponsor"><i>✦</i> برعاية المطور : <b>محمد رمضان الحرباوي</b> <i>•</i> <b>أستاذ محمد حمدي الرفاعي</b> <i>✦</i></div><div><a class="devwa" href="https://wa.me/201500492203" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"  aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg> تواصل مع المطور على واتساب · 01500492203</a></div></div>
 </div>
 
+<div id="print-area"></div>
 <div id="modal" class="modal hide"><div class="card" id="modal-c"></div></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.58.0/dist/umd/supabase.js"></script>
 <script>
@@ -277,8 +300,8 @@ const CONFIG={
   SUPABASE_KEY:"sb_publishable_5EloXpKtnM55jZsAvWhi7A_r05H8ODK",
   TABLE:"hx_results",
   EXAM_ID:"history-2b-2027-t1-unit1-v3",
-  MCQ_MARKS:50, ESSAY_MARKS:50, MIN_WORDS:4,
-  SPONSOR:"محمد رمضان الحرباوي • أستاذ محمد حمدي البرهومي"
+  MCQ_MARKS:50, ESSAY_MARKS:50, MIN_WORDS:4, DURATION_MIN:90,
+  SPONSOR:"محمد رمضان الحرباوي • أستاذ محمد حمدي الرفاعي"
 };
 const LESSONS = ["الدرس 1: بناء الدولة المصرية واستمراريتها","الدرس 2: الدولة القديمة ومقاومة الاحتلال","الدرس 3: التحولات الكبرى – العصر الوسيط","الدرس 4: التحولات الكبرى – العصر الحديث"];
 
@@ -338,63 +361,63 @@ const Q = [
 
 /* ===== المقالي: كل نقطة = نص النموذج + كلمات مفتاحية + عدد الكلمات المطلوبة لاعتبارها كاملة ===== */
 const E = [
-{n:57,l:0,q:"حلل تأثير كل مما يأتي في قوة الدولة عبر التاريخ: (أ) الشعب  (ب) السلطة  (ج) السيادة.",pts:[
+{n:57,m:4,l:0,q:"حلل تأثير كل مما يأتي في قوة الدولة عبر التاريخ: (أ) الشعب  (ب) السلطة  (ج) السيادة.",pts:[
  {t:"الشعب هو الركن الأساسي ومصدر السلطة والسيادة، وكلما زاد وعيه بحقوقه وواجباته قويت الدولة.",k:["شعب","وعي","مصدر السلطة","واجبات","حقوق"],n:2},
  {t:"الشعب خط الدفاع الأول ضد المحتل.",k:["دفاع","محتل","مقاومة"],n:2},
  {t:"السلطة تحافظ على النظام وتضع القوانين وتنفذها وتدير شئون الدولة.",k:["نظام","قوانين","تنفيذ","ادارة","شئون"],n:2},
  {t:"السيادة تعني استقلال الدولة في اتخاذ قراراتها دون الخضوع لسلطة خارجية.",k:["استقلال","قرار","خارجية","خضوع","تبعية"],n:2}]},
-{n:60,l:0,q:"أثبت صحة العبارة: «شكّل التجانس البشري والحضاري للشعب المصري درعًا واقيًا له عبر العصور».",pts:[
+{n:60,m:3,l:0,q:"أثبت صحة العبارة: «شكّل التجانس البشري والحضاري للشعب المصري درعًا واقيًا له عبر العصور».",pts:[
  {t:"انصهر المصريون في بوتقة ثقافية واحدة منذ فجر التاريخ.",k:["انصهر","بوتقة","ثقافية","فجر","تجانس"],n:2},
  {t:"حافظ ذلك على هويتهم وثقافتهم ولغتهم.",k:["هوية","لغة","ثقافة","حافظ"],n:2},
  {t:"وذلك رغم تعرضهم لموجات احتلال متتالية: الهكسوس والفرس والإغريق والرومان والفرنسيين والإنجليز.",k:["هكسوس","فرس","اغريق","روم","فرنس","انجليز","بريطان"],n:3}]},
-{n:62,l:0,q:"أثبت صحة العبارة: «شكّلت البيئة الطبيعية لمصر خط دفاع أول ضد الأخطار الخارجية في العصور القديمة».",pts:[
+{n:62,m:4,l:0,q:"أثبت صحة العبارة: «شكّلت البيئة الطبيعية لمصر خط دفاع أول ضد الأخطار الخارجية في العصور القديمة».",pts:[
  {t:"الصحاري الشرقية والغربية حواجز طبيعية يصعب عبورها أمام الجيوش الغازية.",k:["صحار","حواجز","غازية","جيوش","عبور"],n:2},
  {t:"البحران المتوسط والأحمر حدود منيعة يصعب اختراقها في ذلك الوقت.",k:["متوسط","احمر","بحر","منيعة","اختراق"],n:2},
  {t:"ذلك وفر الحماية لقلب الدولة (الوادي والدلتا).",k:["وادي","دلتا","قلب","حماية"],n:2},
  {t:"مما ساعد على استقرار المجتمع والتركيز على الزراعة والعمران ونشأة الدولة واستقرارها.",k:["استقرار","زراعة","عمران","نشأة"],n:2}]},
-{n:66,l:1,q:"ما النتائج المترتبة على غياب ركن السلطة القوية أثناء التهديدات الخارجية؟",pts:[
+{n:66,m:3,l:1,q:"ما النتائج المترتبة على غياب ركن السلطة القوية أثناء التهديدات الخارجية؟",pts:[
  {t:"ضعف الدولة وشيوع الفوضى والانقسامات الداخلية.",k:["ضعف","فوضى","انقسام","تفكك"],n:2},
  {t:"تشجيع الغزاة على غزو الدولة واختراق حدودها بسهولة.",k:["غزو","غزاة","اختراق","حدود","اطماع"],n:2},
  {t:"سقوط الدولة تحت الاحتلال والسيطرة الأجنبية كما حدث مع الهكسوس والفرس.",k:["سقوط","احتلال","سيطرة","هكسوس","فرس"],n:2}]},
-{n:67,l:1,q:"دلل بالأمثلة على صحة العبارة: «تدل الشواهد التاريخية على أن سقوط مصر القديمة تحت الاحتلال في بعض الفترات كان نتيجة عوامل داخلية أكثر من كونها عوامل خارجية».",pts:[
+{n:67,m:3,l:1,q:"دلل بالأمثلة على صحة العبارة: «تدل الشواهد التاريخية على أن سقوط مصر القديمة تحت الاحتلال في بعض الفترات كان نتيجة عوامل داخلية أكثر من كونها عوامل خارجية».",pts:[
  {t:"الهكسوس: ضعف السلطة المركزية في أواخر عصر الدولة الوسطى شجعهم على التسلل ودخول البلاد واحتلالها.",k:["هكسوس","ضعف","سلطة مركزية","دولة وسطى","تسلل"],n:3},
  {t:"الفرس: ضعف السلطة المركزية في العصر المتأخر فوقعت البلاد تحت الاحتلال الفارسي.",k:["فرس","عصر متأخر","ضعف","سلطة","انقسام"],n:2}]},
-{n:69,l:0,q:"حلل العبارة مستشهدًا بأدلة تاريخية: «كان موقع مصر الجغرافي سببًا رئيسيًا في تعرضها لغزوات الطامعين».",pts:[
+{n:69,m:4,l:0,q:"حلل العبارة مستشهدًا بأدلة تاريخية: «كان موقع مصر الجغرافي سببًا رئيسيًا في تعرضها لغزوات الطامعين».",pts:[
  {t:"موقعها في قلب العالم القديم وملتقى القارات الثلاث (إفريقيا وآسيا وأوروبا).",k:["قلب العالم","قارات","افريقيا","اسيا","اوروبا","ملتقى"],n:2},
  {t:"إشرافها على البحرين الأحمر والمتوسط.",k:["احمر","متوسط","بحر"],n:2},
  {t:"جعلها مركزًا للتبادل التجاري وذات أهمية استراتيجية وعسكرية.",k:["تجار","استراتيج","عسكر","تبادل"],n:2},
  {t:"الأدلة: غزوات متعاقبة (الهكسوس، الفرس، الإغريق، الرومان، الحملة الفرنسية، ثم الاحتلال البريطاني) بهدف السيطرة على هذا الموقع.",k:["هكسوس","فرس","اغريق","روم","فرنس","بريطان","انجليز"],n:3}]},
-{n:72,l:1,q:"ناقش في ضوء عوامل قيام الدولة المصرية أسباب احتلال الرومان لمصر.",pts:[
+{n:72,m:4,l:1,q:"ناقش في ضوء عوامل قيام الدولة المصرية أسباب احتلال الرومان لمصر.",pts:[
  {t:"الرغبة في السيطرة على الموارد الاقتصادية وخاصة الحبوب لضمان الاستقرار الغذائي للإمبراطورية.",k:["حبوب","غلال","موارد","غذائي","قمح","اقتصاد"],n:2},
  {t:"ضعف السلطة المركزية والاضطرابات الداخلية والصراع على الحكم أواخر حكم البطالمة.",k:["ضعف","سلطة","اضطراب","صراع","بطالمة","داخلي"],n:2},
  {t:"الاستفادة من الموقع الجغرافي للتحكم في طرق التجارة بين الشرق والغرب.",k:["موقع","تجار","طرق","شرق","غرب"],n:2}]},
-{n:76,l:3,q:"وضّح تباين تأثير افتتاح قناة السويس على مصر في العصر الحديث.",pts:[
+{n:76,m:4,l:3,q:"وضّح تباين تأثير افتتاح قناة السويس على مصر في العصر الحديث.",pts:[
  {t:"الأثر الإيجابي: زادت أهمية موقعها الاستراتيجي وأصبحت محورًا للتجارة العالمية والملاحة بين الشرق والغرب.",k:["اهمية","موقع","تجار","ملاح","شرق","غرب","استراتيج"],n:3},
  {t:"الأثر السلبي: أثارت أطماع القوى الاستعمارية الكبرى وعلى رأسها بريطانيا.",k:["اطماع","استعمار","بريطان"],n:2},
  {t:"أدى ذلك إلى التدخل الأجنبي ثم الاحتلال البريطاني عام 1882م لحماية طريق مواصلاتها إلى الهند.",k:["احتلال","1882","هند","تدخل","طريق"],n:2}]},
-{n:78,l:3,q:"فسّر العلاقة بين: ضعف الدولة الداخلية، وتزايد الأطماع الخارجية.",pts:[
+{n:78,m:4,l:3,q:"فسّر العلاقة بين: ضعف الدولة الداخلية، وتزايد الأطماع الخارجية.",pts:[
  {t:"إسراف الخديو إسماعيل في الاستدانة وتراكم الديون وعجزه عن السداد.",k:["اسماعيل","ديون","استدان","عجز","سداد"],n:2},
  {t:"فتح ذلك الباب للتدخل الأجنبي: صندوق الدين، المراقبة الثنائية، الوزارة المختلطة.",k:["صندوق","مراقبة","وزارة مختلطة","تدخل","اجنبي"],n:2},
  {t:"وانتهى الأمر بسلب السيادة السياسية والاقتصادية وسقوط البلاد تحت الاحتلال البريطاني عام 1882م.",k:["سيادة","احتلال","1882","بريطان","استقلال"],n:2}]},
-{n:84,l:3,q:"«تطبيق معاهدة بلطة ليمان التي عُقدت عام 1838م». حدد النتيجة المباشرة على الاقتصاد المصري.",pts:[
+{n:84,m:3,l:3,q:"«تطبيق معاهدة بلطة ليمان التي عُقدت عام 1838م». حدد النتيجة المباشرة على الاقتصاد المصري.",pts:[
  {t:"انهيار نظام الاحتكار الذي طبقه محمد علي.",k:["احتكار","انهيار","الغاء","سقوط"],n:2},
  {t:"فتح الأسواق المصرية أمام المنتجات الأجنبية وخاصة البريطانية.",k:["اسواق","منتجات","اجنب","بريطان","بضائع"],n:2},
  {t:"تراجع الصناعة المحلية وإضعاف الاقتصاد القومي.",k:["صناعة","تراجع","ضعف","محلية","وطني"],n:2}]},
-{n:87,l:3,q:"قارن بين أسباب خضوع مصر للاحتلال في العصور القديمة والعصر الحديث من حيث وجه الشبه والاختلاف.",pts:[
+{n:87,m:4,l:3,q:"قارن بين أسباب خضوع مصر للاحتلال في العصور القديمة والعصر الحديث من حيث وجه الشبه والاختلاف.",pts:[
  {t:"وجه الشبه: استغلال الغزاة لضعف السلطة المركزية والصراعات الداخلية في مصر.",k:["ضعف","سلطة","صراع","داخلي","استغلال"],n:2},
  {t:"وجه الشبه: الطمع في موقع مصر الاستراتيجي وثرواتها.",k:["موقع","ثروات","موارد","اطماع","استراتيج"],n:2},
  {t:"الاختلاف (قديمًا): غزو عسكري مباشر وسيطرة مباشرة كما فعل الهكسوس والفرس.",k:["عسكري","مباشر","غزو","هكسوس","فرس"],n:2},
  {t:"الاختلاف (حديثًا): تغلغل مالي واقتصادي عبر الديون قبل الاحتلال العسكري المباشر.",k:["ديون","مالي","اقتصادي","تغلغل","تدخل"],n:2}]},
-{n:93,l:3,q:"إذا كنت مسئولًا، كيف تعالج أزمة الديون التي واجهتها مصر في القرن الـ19م؟",pts:[
+{n:93,m:3,l:3,q:"إذا كنت مسئولًا، كيف تعالج أزمة الديون التي واجهتها مصر في القرن الـ19م؟",pts:[
  {t:"ترشيد الإنفاق الحكومي ووقف المشروعات غير الإنتاجية.",k:["ترشيد","انفاق","وقف","مشروعات"],n:2},
  {t:"استثمار الموارد المتاحة في دعم القطاعات الإنتاجية كالزراعة والصناعة.",k:["استثمار","زراعة","صناعة","انتاج","موارد"],n:2},
  {t:"الحد من الواردات والتوسع في الصادرات.",k:["واردات","صادرات","استيراد","تصدير"],n:2},
  {t:"سداد الديون من الفائض الإنتاجي الذاتي في مواعيدها المحددة.",k:["سداد","فائض","مواعيد","ديون"],n:2}]},
-{n:96,l:1,q:"فسّر العلاقة بين: القوة العسكرية وتحقيق الاستقلال في الحضارة المصرية القديمة (مستشهدًا بأدلة تاريخية).",pts:[
+{n:96,m:3,l:1,q:"فسّر العلاقة بين: القوة العسكرية وتحقيق الاستقلال في الحضارة المصرية القديمة (مستشهدًا بأدلة تاريخية).",pts:[
  {t:"القوة العسكرية هي الحامي والضامن الرئيسي لاستقلال الدولة وسيادتها ضد الأخطار الخارجية.",k:["حامي","ضامن","حماية","استقلال","سيادة","اخطار"],n:2},
  {t:"الدليل: نجح الملك أحمس في تجهيز جيش قوي مزود بالعربات الحربية وطرد الهكسوس واستعاد استقلال مصر.",k:["احمس","هكسوس","عربات","جيش","طرد"],n:3},
  {t:"أدرك ملوك الدولة الحديثة أهمية تطوير الجيش لحماية الحدود، فأسهم ذلك في بناء أول إمبراطورية في التاريخ.",k:["دولة حديثة","جيش","تطوير","حدود","امبراطورية"],n:2}]},
-{n:99,l:3,q:"ناقش العبارة مدللًا على صحتها: «الموقع الجغرافي لمصر نعمة ونقمة في آن واحد».",pts:[
+{n:99,m:4,l:3,q:"ناقش العبارة مدللًا على صحتها: «الموقع الجغرافي لمصر نعمة ونقمة في آن واحد».",pts:[
  {t:"نعمة: جعل مصر مركزًا للتبادل التجاري والتواصل الحضاري ومنحها مكانة استراتيجية.",k:["نعمة","تجار","حضار","تواصل","مكانة","استراتيج"],n:2},
  {t:"نقمة: جعلها محط أنظار وأطماع القوى الاستعمارية عبر العصور.",k:["نقمة","اطماع","استعمار","غزو"],n:2},
  {t:"الدليل: قناة السويس زادت أهمية الموقع التجارية، لكنها كانت السبب الحاسم لطمع بريطانيا في احتلال مصر 1882م لحماية طريق مواصلاتها.",k:["قناة","سويس","بريطان","1882","هند","احتلال"],n:3}]}
@@ -442,7 +465,7 @@ function evalEssay(e,text){
     return {r, hit, miss:p.k.filter(k=>!hit.includes(k))};
   });
   const cov = pts.reduce((a,p)=>a+p.r,0)/pts.length;
-  return {pts, cov, ok, marks: cov*ESC_MARK};
+  return {pts, cov, ok, marks: cov*(e.m||ESC_MARK)};
 }
 function highlight(e,text){
   if(!text.trim()) return '<span class="empty">لم تكتب إجابة.</span>';
@@ -472,7 +495,7 @@ function compareHTML(e,text){
     <div class="cmp-top">
       <div class="cov" style="--p:${pct};--c:${col}"><span>${pct}%</span></div>
       <div class="t"><b>تغطية نقاط النموذج: ${ev.pts.filter(p=>p.r>=1).length} كاملة · ${ev.pts.filter(p=>p.r>0&&p.r<1).length} جزئية · ${ev.pts.filter(p=>p.r===0).length} ناقصة</b>
-      <div>تقدير الدرجة المبدئي: <b style="color:var(--gold)">${r1(ev.marks)}</b> من ${r1(ESC_MARK)} ${ev.ok?"":"· (الإجابة أقصر من الحد الأدنى "+CONFIG.MIN_WORDS+" كلمات)"}</div></div>
+      <div>تقدير الدرجة المبدئي: <b style="color:var(--gold)">${r1(ev.marks)}</b> من ${r1(e.m||ESC_MARK)} ${ev.ok?"":"· (الإجابة أقصر من الحد الأدنى "+CONFIG.MIN_WORDS+" كلمات)"}</div></div>
     </div>
     <div class="cmp-grid">
       <div class="col mine"><h4>✍️ إجابتك <span class="wc">(${words(text)} كلمة)</span></h4><div class="mine-t">${highlight(e,text)}</div></div>
@@ -502,7 +525,8 @@ function setConn(st,msg){
   const e=$("a-err"); e.textContent=msg||(NET_HELP+(window.top!==window.self?" (الصفحة الحالية مفتوحة داخل إطار/معاينة)":"")); e.classList.remove("hide");
 }
 
-let AUTO=null;
+let AUTO=null, AM="login";
+document.querySelectorAll("[data-am]").forEach(b=>b.onclick=()=>{ AM=b.dataset.am; document.querySelectorAll("[data-am]").forEach(x=>x.classList.toggle("on",x===b)); $("a-go").textContent=AM==="login"?"دخول ▶":"إنشاء حساب مدرس ▶"; $("a-err").classList.add("hide"); });
 const fail=m=>{ const e=$("a-err"); e.textContent=m; e.classList.remove("hide"); const b=$("a-go"); b.disabled=false; b.classList.remove("busy"); };
 $("a-eye").onclick=()=>{ const i=$("a-pass"); i.type=i.type==="password"?"text":"password"; };
 $("a-go").onclick=async()=>{
@@ -512,19 +536,31 @@ $("a-go").onclick=async()=>{
   const b=$("a-go"); b.disabled=true; b.classList.add("busy");
   try{
     const email=u.includes("@")?u:u+"@gmail.com";
-    const {data,error}=await sb.auth.signInWithPassword({email,password:p});
-    if(error) return fail(isNetErr(error.message)?NET_HELP:/Invalid login/i.test(error.message)?"اسم المستخدم أو كلمة السر غلط.":error.message);
-    await enter(data.user);
+    if(AM==="signup"){
+      if(!u.includes("@")) return fail("اكتب إيميلك الكامل.");
+      if(p.length<6) return fail("كلمة السر لازم تكون 6 على الأقل.");
+      const {data,error}=await sb.auth.signUp({email,password:p});
+      if(error) return fail(isNetErr(error.message)?NET_HELP:/already registered|already been registered/i.test(error.message)?"الإيميل ده متسجّل قبل كده، استخدم تبويب «دخول».":/is invalid|email_address_invalid/i.test(error.message)?"الإيميل غير صالح.":error.message);
+      if(!data.session) return fail("الحساب اتعمل لكن محتاج تفعيل: لازم المدرس الأساسي يقفل Confirm email من Supabase.");
+      await enter(data.user);
+    }else{
+      const {data,error}=await sb.auth.signInWithPassword({email,password:p});
+      if(error) return fail(isNetErr(error.message)?NET_HELP:/Invalid login/i.test(error.message)?"اسم المستخدم أو كلمة السر غلط.":error.message);
+      await enter(data.user);
+    }
   }catch(e){ return fail(dbErr(e)); }
   b.disabled=false; b.classList.remove("busy");
 };
 $("a-pass").addEventListener("keydown",e=>{ if(e.key==="Enter") $("a-go").click(); });
 async function offerClaim(user){
+  const inv=await sb.rpc("hx_claim_admin_by_invite");
+  if(inv.error) throw inv.error;
+  if(inv.data){ return enter(user); }
   const {data:ex,error}=await sb.rpc("hx_admin_exists");
   if(error) throw error;
-  if(ex){ await sb.auth.signOut(); return fail("الحساب ده ملوش صلاحية المدرس. اطلب من المدرس الأساسي يضيفك."); }
-  const box=$("a-claim"); box.classList.remove("hide");
   const b=$("a-go"); b.disabled=false; b.classList.remove("busy");
+  if(ex){ await sb.auth.signOut(); return fail("الإيميل ده لسه مش مضاف كمدرس. اطلب من المدرس الأساسي يضيف إيميلك من تبويب «المدرسين» وبعدها سجّل دخول تاني."); }
+  const box=$("a-claim"); box.classList.remove("hide");
   $("a-claim-b").onclick=async()=>{
     const {data:ok,error:e}=await sb.rpc("hx_claim_first_admin");
     if(e) return fail(dbErr(e));
@@ -542,18 +578,20 @@ async function enter(user){
 $("d-out").onclick=async()=>{ try{await sb.auth.signOut()}catch(e){} location.reload(); };
 
 /* ============ تحميل البيانات ============ */
-let ROWS=[], RES=[];
+let ROWS=[], RES=[], REQ=[];
 const fin=r=>(+r.mcq_score||0)+(r.teacher_essay_score!=null?+r.teacher_essay_score:(+r.essay_score||0));
+const graded=r=>r.teacher_essay_score!=null;
 async function loadAll(silent){
   if(!silent) $("p-ov").innerHTML='<div class="card"><div class="status wait">⏳ جاري تحميل البيانات...</div></div>';
-  const [p,s,r]=await Promise.all([
+  const [p,s,r,rq]=await Promise.all([
     sb.from("hx_profiles").select("id,full_name,phone,grp,created_at").order("created_at",{ascending:false}).limit(3000),
     sb.from("hx_sessions").select("user_id,started_at,progress").eq("exam_id",CONFIG.EXAM_ID).limit(3000),
-    sb.from(CONFIG.TABLE).select("id,user_id,student_name,phone,grp,mcq_score,essay_score,teacher_essay_score,time_spent_sec,tab_switches,auto_submitted,created_at,lessons,answers,late").eq("exam_id",CONFIG.EXAM_ID).limit(3000)
+    sb.from(CONFIG.TABLE).select("id,user_id,student_name,phone,grp,mcq_score,essay_score,teacher_essay_score,time_spent_sec,tab_switches,auto_submitted,created_at,lessons,answers,late,closed_by_admin").eq("exam_id",CONFIG.EXAM_ID).limit(3000),
+    sb.from("hx_requests").select("*").eq("exam_id",CONFIG.EXAM_ID).order("created_at",{ascending:false}).limit(1000)
   ]);
   const err=p.error||s.error||r.error;
   if(err){ $("p-ov").innerHTML='<div class="card"><div class="status err">'+esc(err.message)+'</div></div>'; return; }
-  RES=r.data||[];
+  RES=r.data||[]; REQ=rq.error?[]:(rq.data||[]);
   const rb=Object.fromEntries(RES.map(x=>[x.user_id,x])), sbm=Object.fromEntries((s.data||[]).map(x=>[x.user_id,x]));
   ROWS=(p.data||[]).map(x=>{ const res=rb[x.id], se=sbm[x.id]; return {uid:x.id,name:x.full_name,phone:x.phone,grp:x.grp||"",joined:x.created_at,st:res?"done":se?"prog":"none",res,started:se?.started_at,prog:se?.progress}; });
   const gs=[...new Set(ROWS.map(x=>x.grp).filter(Boolean))].sort();
@@ -564,28 +602,31 @@ async function loadAll(silent){
 $("d-ref").onclick=loadAll;
 document.querySelectorAll("[data-tb]").forEach(b=>b.onclick=()=>{
   document.querySelectorAll("[data-tb]").forEach(x=>x.classList.toggle("on",x===b));
-  ["p-ov","p-st","p-q"].forEach(id=>$(id).classList.toggle("hide",id!==b.dataset.tb));
+  ["p-ov","p-st","p-gr","p-rq","p-q","p-tc"].forEach(id=>$(id).classList.toggle("hide",id!==b.dataset.tb));
+  if(b.dataset.tb==="p-tc") loadTeachers();
 });
-function drawAll(){ drawOverview(); drawStudents(); drawQuestions(); }
+function drawAll(){ drawOverview(); drawStudents(); drawGrading(); drawRequests(); drawQuestions(); }
 
 /* ============ نظرة عامة ============ */
 const card=(n,l,c)=>`<div class="stat"><b${c?` style="color:${c}"`:""}>${n}</b><span>${l}</span></div>`;
 function drawOverview(){
-  const done=ROWS.filter(x=>x.st==="done"), sc=done.map(x=>fin(x.res)).sort((a,b)=>a-b);
-  const n=sc.length, avg=n?sc.reduce((a,b)=>a+b,0)/n:0, med=n?(n%2?sc[(n-1)/2]:(sc[n/2-1]+sc[n/2])/2):0;
+  const done=ROWS.filter(x=>x.st==="done"), gr=done.filter(x=>graded(x.res));
+  const sc=gr.map(x=>fin(x.res)).sort((a,b)=>a-b), n=sc.length;
+  const avg=n?sc.reduce((a,b)=>a+b,0)/n:0;
   const pass=n?Math.round(sc.filter(x=>x>=50).length/n*100):0;
-  const avgT=n?done.reduce((a,x)=>a+(x.res.time_spent_sec||0),0)/n:0;
+  const mc=done.map(x=>+x.res.mcq_score), avgM=mc.length?mc.reduce((a,b)=>a+b,0)/mc.length:0;
+  const avgT=done.length?done.reduce((a,x)=>a+(x.res.time_spent_sec||0),0)/done.length:0;
   const flagged=done.filter(x=>x.res.tab_switches>=3).length, auto=done.filter(x=>x.res.auto_submitted).length;
   const bk=Array(10).fill(0); sc.forEach(v=>bk[Math.min(9,Math.floor(v/10))]++); const mx=Math.max(1,...bk);
   const L=LESSONS.map((_,i)=>{ let g=0,t=0; done.forEach(x=>{ const l=(x.res.lessons||[])[i]; if(l){g+=+l.right;t+=+l.total;} }); return t?g/t*100:0; });
-  const top=done.slice().sort((a,b)=>fin(b.res)-fin(a.res)||a.res.time_spent_sec-b.res.time_spent_sec).slice(0,10);
+  const top=gr.slice().sort((a,b)=>fin(b.res)-fin(a.res)||a.res.time_spent_sec-b.res.time_spent_sec).slice(0,10);
   $("p-ov").innerHTML=`
    <div class="card"><h3 class="gold" style="margin-bottom:10px">حالة الطلاب</h3><div class="stats s4">${card(ROWS.length,"مسجّلين")}${card(done.length,"سلّموا","var(--ok)")}${card(ROWS.filter(x=>x.st==="prog").length,"جاري امتحانهم","var(--warn)")}${card(ROWS.filter(x=>x.st==="none").length,"لم يبدأوا","var(--mute)")}</div></div>
-   <div class="card"><h3 class="gold" style="margin-bottom:10px">إحصائيات الدرجات (من 100)</h3><div class="stats s5">${card(r1(avg),"المتوسط")}${card(r1(med),"الوسيط")}${card(n?r1(sc[n-1]):0,"الأعلى","var(--ok)")}${card(n?r1(sc[0]):0,"الأقل","var(--bad)")}${card(pass+"%","نسبة النجاح (≥50)")}</div>
-     <div class="stats s4" style="margin-top:10px">${card(mmss(avgT),"متوسط الوقت")}${card(flagged,"خرجوا من الصفحة 3+ مرات","var(--warn)")}${card(auto,"تسليم تلقائي (انتهى الوقت)")}${card(done.filter(x=>x.res.teacher_essay_score==null).length,"مقالي لم يُراجع بعد")}</div></div>
-   <div class="card"><h3 class="gold">توزيع الدرجات</h3><div class="bars">${bk.map((v,i)=>`<div><b>${v||""}</b><i style="height:${v/mx*100}%"></i><small>${i*10}-${i===9?100:i*10+9}</small></div>`).join("")}</div></div>
-   <div class="card"><h3 class="gold">متوسط الأداء حسب الدرس</h3>${LESSONS.map((l,i)=>`<div class="lb"><span>${esc(l)}</span><span>${Math.round(L[i])}%</span></div><div class="lbar"><i style="width:${L[i]}%;background:${L[i]>=75?"var(--ok)":L[i]>=50?"var(--warn)":"var(--bad)"}"></i></div>`).join("")}</div>
-   <div class="card"><h3 class="gold">🏆 أعلى 10 طلاب</h3><div class="tbl" style="max-height:none"><table><tr><th>#</th><th>الاسم</th><th>المجموعة</th><th>الدرجة</th><th>الوقت</th></tr>${top.map((x,i)=>`<tr><td>${["🥇","🥈","🥉"][i]||i+1}</td><td>${esc(x.name)}</td><td>${esc(x.grp)}</td><td><b>${r1(fin(x.res))}</b></td><td>${mmss(x.res.time_spent_sec)}</td></tr>`).join("")||'<tr><td colspan="5" class="sub">لا توجد نتائج بعد.</td></tr>'}</table></div></div>`;
+   <div class="card"><h3 class="gold" style="margin-bottom:10px">الدرجات</h3><div class="stats s5">${card(r1(avgM)+" / 50","متوسط الاختيار (الكل)")}${card(n?r1(avg):"–","متوسط الدرجة النهائية /100 (المصحَّح)")}${card(n?r1(sc[n-1]):"–","الأعلى","var(--ok)")}${card(n?r1(sc[0]):"–","الأقل","var(--bad)")}${card(n?pass+"%":"–","نسبة النجاح (≥50)")}</div>
+     <div class="stats s5" style="margin-top:10px">${card(mmss(avgT),"متوسط الوقت")}${card(done.length-gr.length,"مقالي في انتظار تصحيحك","var(--warn)")}${card(flagged,"خرجوا من الصفحة 3+ مرات","var(--warn)")}${card(auto,"تسليم تلقائي")}${card(done.filter(x=>x.res.closed_by_admin).length,"أُغلقت بواسطتك")}</div></div>
+   <div class="card"><h3 class="gold">توزيع الدرجات النهائية (المصحَّح فقط)</h3><div class="bars">${bk.map((v,i)=>`<div><b>${v||""}</b><i style="height:${v/mx*100}%"></i><small>${i*10}-${i===9?100:i*10+9}</small></div>`).join("")}</div></div>
+   <div class="card"><h3 class="gold">متوسط أداء الاختيار حسب الدرس</h3>${LESSONS.map((l,i)=>`<div class="lb"><span>${esc(l)}</span><span>${Math.round(L[i])}%</span></div><div class="lbar"><i style="width:${L[i]}%;background:${L[i]>=75?"var(--ok)":L[i]>=50?"var(--warn)":"var(--bad)"}"></i></div>`).join("")}</div>
+   <div class="card"><h3 class="gold">🏆 أعلى 10 طلاب (بعد التصحيح)</h3><div class="tbl" style="max-height:none"><table><tr><th>#</th><th>الاسم</th><th>المجموعة</th><th>الدرجة</th><th>الوقت</th></tr>${top.map((x,i)=>`<tr><td>${["🥇","🥈","🥉"][i]||i+1}</td><td>${esc(x.name)}</td><td>${esc(x.grp)}</td><td><b>${r1(fin(x.res))}</b></td><td>${mmss(x.res.time_spent_sec)}</td></tr>`).join("")||'<tr><td colspan="5" class="sub">لا توجد نتائج مصحَّحة بعد.</td></tr>'}</table></div></div>`;
 }
 
 /* ============ الطلاب ============ */
@@ -598,53 +639,237 @@ function filtered(){
   return L;
 }
 const progTxt=x=>{ const p=x.prog; if(!p) return "بدأ"; const m=Object.keys(p.ans||{}).length, e=Object.values(p.es||{}).filter(t=>words(t||"")>=CONFIG.MIN_WORDS).length; return "اختيار "+m+"/"+Q.length+" · مقالي "+e+"/"+E.length; };
+const bdg=(t,c)=>`<span class="badge ${c}">${t}</span>`;
 function drawStudents(){
   const L=filtered();
-  $("d-t").innerHTML="<tr><th>#</th><th>الاسم</th><th>الموبايل</th><th>المجموعة</th><th>الحالة</th><th>اختيار</th><th>مقالي</th><th>الإجمالي</th><th>الوقت</th><th>خروج</th><th></th></tr>"+
-   L.map((x,i)=>{ const r=x.res; return `<tr><td>${i+1}</td><td>${esc(x.name)}</td><td dir="ltr">${esc(x.phone)}</td><td>${esc(x.grp)}</td><td>${STL[x.st]}${r&&r.late?' <span class="badge b-prog">متأخر</span>':""}</td>`+
-    (r?`<td>${r1(+r.mcq_score)}</td><td>${r1(r.teacher_essay_score!=null?+r.teacher_essay_score:+r.essay_score)}${r.teacher_essay_score!=null?" ✓":""}</td><td><b>${r1(fin(r))}</b></td><td>${mmss(r.time_spent_sec)}</td><td${r.tab_switches>=3?' style="color:var(--bad);font-weight:800"':""}>${r.tab_switches}</td>`:
-      x.st==="prog"?`<td colspan="5" class="sub">${esc(progTxt(x))}${x.prog&&x.prog.sw?" · خروج "+x.prog.sw:""}</td>`:'<td>–</td><td>–</td><td>–</td><td>–</td><td>–</td>')+
-    `<td style="display:flex;gap:6px">${r?`<button class="btn ghost sm" data-rv="${r.id}">مراجعة</button>`:""}<button class="btn wa sm" data-wa="${x.uid}" title="واتساب">💬</button>${x.st!=="none"?`<button class="btn ghost sm" data-rs="${x.uid}">إعادة فتح</button>`:""}</td></tr>`; }).join("")||'<tr><td colspan="11" class="sub">لا يوجد طلاب مطابقين.</td></tr>';
+  $("d-t").innerHTML="<tr><th>#</th><th>الاسم</th><th>الموبايل</th><th>المجموعة</th><th>الحالة</th><th>الدرجة /100</th><th>اختيار</th><th>مقالي</th><th>الوقت</th><th>خروج</th><th>إجراءات</th></tr>"+
+  L.map((x,i)=>{
+    const r=x.res; let mid, st=STL[x.st];
+    if(r){
+      st+=(r.closed_by_admin?" "+bdg("أُغلق","b-prog"):"")+(r.late?" "+bdg("متأخر","b-prog"):"");
+      const g=fin(r), gc=g>=75?"var(--ok)":g>=50?"var(--warn)":"var(--bad)";
+      mid=`<td><b style="color:${gc};font-size:17px">${r1(g)}</b>${graded(r)?"":' <small class="sub">(اختيار فقط)</small>'}</td><td>${r1(+r.mcq_score)}</td><td>${graded(r)?r1(+r.teacher_essay_score)+" ✓":'<span class="badge b-prog">لم يُصحَّح</span>'}</td><td>${mmss(r.time_spent_sec)}</td><td${r.tab_switches>=3?' style="color:var(--bad);font-weight:800"':""}>${r.tab_switches}</td>`;
+    }else if(x.st==="prog"){
+      mid=`<td>–</td><td colspan="4" class="sub">${esc(progTxt(x))}${x.prog&&x.prog.sw?" · خروج "+x.prog.sw:""}</td>`;
+    }else mid='<td>–</td><td>–</td><td>–</td><td>–</td><td>–</td>';
+    const act=[
+      r?`<button class="btn ${graded(r)?"ghost":""} sm" data-rv="${r.id}">${graded(r)?"مراجعة":"تصحيح"}</button>`:"",
+      x.st==="prog"?`<button class="btn ghost sm" data-lv="${x.uid}">متابعة</button>`:"",
+      `<button class="btn wa sm" data-wa="${x.uid}" title="واتساب">💬</button>`,
+      !r?`<button class="btn ghost sm" data-cl="${x.uid}" style="color:var(--bad);border-color:var(--bad)">إغلاق الامتحان</button>`:"",
+      x.st!=="none"?`<button class="btn ghost sm" data-ro="${x.uid}">محاولة جديدة</button>`:"",
+      `<button class="btn ghost sm" data-dl="${x.uid}" style="color:var(--bad);border-color:var(--bad)">حذف</button>`
+    ].join("");
+    return `<tr><td>${i+1}</td><td><b>${esc(x.name)}</b></td><td dir="ltr">${esc(x.phone)}</td><td>${esc(x.grp)}</td><td>${st}</td>${mid}<td><div style="display:flex;gap:6px;flex-wrap:wrap;max-width:240px;white-space:normal">${act}</div></td></tr>`;
+  }).join("")||'<tr><td colspan="11" class="sub">لا يوجد طلاب مطابقين.</td></tr>';
 }
 ["f-q","f-s","f-g","f-o"].forEach(id=>{ $(id).oninput=drawStudents; $(id).onchange=drawStudents; });
 $("d-t").onclick=e=>{
-  const rv=e.target.closest("[data-rv]"), wa=e.target.closest("[data-wa]"), rs=e.target.closest("[data-rs]");
+  const g=a=>e.target.closest("["+a+"]");
+  const rv=g("data-rv"), lv=g("data-lv"), wa=g("data-wa"), cl=g("data-cl"), ro=g("data-ro"), dl=g("data-dl");
   if(rv) reviewRow(rv.dataset.rv);
+  if(lv) reviewLive(lv.dataset.lv);
   if(wa){ const x=ROWS.find(y=>y.uid===wa.dataset.wa); window.open("https://wa.me/"+toIntl(x.phone),"_blank"); }
-  if(rs) resetStudent(rs.dataset.rs);
+  if(cl) closeExam(cl.dataset.cl);
+  if(ro) reopenExam(ro.dataset.ro);
+  if(dl) deleteMenu(dl.dataset.dl);
 };
-async function resetStudent(uid){
+async function closeExam(uid){
   const x=ROWS.find(y=>y.uid===uid);
-  if(!confirm("هتمسح محاولة الطالب «"+x.name+"» (نتيجة وجلسة) وتسمحله يبدأ من جديد. متأكد؟")) return;
-  const a=await sb.from(CONFIG.TABLE).delete().eq("user_id",uid).eq("exam_id",CONFIG.EXAM_ID);
-  const b=await sb.from("hx_sessions").delete().eq("user_id",uid).eq("exam_id",CONFIG.EXAM_ID);
-  if(a.error||b.error){ alert((a.error||b.error).message); return; }
+  if(!confirm("هتقفل الامتحان على «"+x.name+"» دلوقتي. هتتسجل إجاباته المحفوظة وتتصحح، ومش هيقدر يكمل. متأكد؟")) return;
+  const {error}=await sb.rpc("hx_admin_close_exam",{p_user:uid,p_exam_id:CONFIG.EXAM_ID,p_note:null});
+  if(error){ alert(dbErr(error)); return; }
+  closeModal(); await loadAll();
+}
+async function reopenExam(uid){
+  const x=ROWS.find(y=>y.uid===uid);
+  if(!confirm("هتفتح محاولة جديدة للطالب «"+x.name+"». المحاولة الحالية هتتأرشف (تفضل محفوظة عندك) وهيبدأ امتحان جديد من الأول. متأكد؟")) return;
+  const {error}=await sb.rpc("hx_admin_reopen",{p_user:uid,p_exam_id:CONFIG.EXAM_ID});
+  if(error){ alert(dbErr(error)); return; }
   closeModal(); await loadAll();
 }
 
-/* ============ مراجعة طالب ============ */
+/* ============ جدول إجابات الاختيار (صح / غلط / لم يجب) ============ */
+function qaBlock(chosenOf){
+  const items=Q.map((q,i)=>{ const ch=chosenOf(i); return {i,q,ch,st:ch==null?"na":(ch===q[1]?"ok":"bad")}; });
+  const c={ok:0,bad:0,na:0}; items.forEach(x=>c[x.st]++);
+  const lab={ok:bdg("صح","b-done"),bad:'<span class="badge" style="background:rgba(251,113,133,.18);color:var(--bad)">غلط</span>',na:bdg("لم يجب","b-none")};
+  return `<div class="card"><h3 class="gold" style="margin-bottom:10px">إجابات الاختيار من متعدد</h3>
+   <div class="stats s4"><div class="stat"><b style="color:var(--ok)">${c.ok}</b><span>صح</span></div><div class="stat"><b style="color:var(--bad)">${c.bad}</b><span>غلط</span></div><div class="stat"><b style="color:var(--mute)">${c.na}</b><span>لم يجب</span></div><div class="stat"><b>${Q.length-c.na}/${Q.length}</b><span>اللي جاوب عليه</span></div></div>
+   <div class="row" style="margin:12px 0"><button class="btn ghost sm" data-qf="all">الكل</button><button class="btn ghost sm" data-qf="bad">الغلط فقط</button><button class="btn ghost sm" data-qf="na">اللي لم يجب عليه</button><button class="btn ghost sm" data-qf="ok">الصح فقط</button></div>
+   <div class="tbl" style="max-height:50vh"><table id="qa-t"><tr><th>#</th><th>السؤال</th><th>إجابة الطالب</th><th>الإجابة الصحيحة</th><th>الحالة</th></tr>${items.map(x=>`<tr class="qa qa-${x.st}"><td>${x.i+1}</td><td style="white-space:normal;min-width:260px">${esc(x.q[0])}</td><td style="white-space:normal;min-width:160px">${x.ch==null?'<span class="sub">— لم يجب —</span>':esc(x.ch)}</td><td style="white-space:normal;min-width:160px">${esc(x.q[1])}</td><td>${lab[x.st]}</td></tr>`).join("")}</table></div></div>`;
+}
+function wireQa(){
+  document.querySelectorAll("[data-qf]").forEach(b=>b.onclick=()=>{
+    const f=b.dataset.qf;
+    document.querySelectorAll("#qa-t tr.qa").forEach(r=>r.classList.toggle("hide",f!=="all"&&!r.classList.contains("qa-"+f)));
+  });
+}
+const essOf=x=>x.id!=null?E.find(z=>z.n===x.id):E[x.idx];
+
+/* ============ مراجعة وتصحيح طالب سلّم / أُغلق عليه ============ */
 async function reviewRow(id){
   const {data:r,error}=await sb.from(CONFIG.TABLE).select("*").eq("id",id).single();
-  if(error){ alert(error.message); return; }
-  const wrong=(r.answers||[]).filter(a=>!a.ok);
-  const mcqHTML=wrong.length?`<details class="card"><summary style="cursor:pointer;font-weight:800">أسئلة الاختيار الغلط (${wrong.length})</summary>${wrong.map(a=>{const q=Q[a.q-1]; return `<div style="margin-top:10px"><div class="qt">${a.q}. ${esc(q?q[0]:"")}</div><div class="sub">إجابة الطالب: <b style="color:var(--bad)">${esc(a.chosen??"— لم يجب —")}</b> · الصحيحة: <b style="color:var(--ok)">${esc(a.correct)}</b></div></div>`}).join("")}</details>`:"";
-  const body=(r.essays||[]).map(x=>{ const e=E.find(z=>z.n===x.id); return e?`<div class="card"><p class="qt">${esc(e.q)}</p>${x.revealed?'<div class="lockn">⚠️ الطالب فتح النموذج قبل التسليم</div>':""}${compareHTML(e,x.text||"")}</div>`:""; }).join("");
-  modal(`<div class="who-row"><h3 class="gold">${esc(r.student_name)} · <span dir="ltr">${esc(r.phone||"")}</span></h3><button class="btn ghost sm" id="rv-x">إغلاق</button></div>
-   <div class="stats s4" style="margin-top:12px"><div class="stat"><b>${r1(+r.mcq_score)}</b><span>الاختيار / ${CONFIG.MCQ_MARKS}</span></div><div class="stat"><b>${r1(+r.essay_score)}</b><span>المقالي الآلي</span></div><div class="stat"><b>${mmss(r.time_spent_sec)}</b><span>الوقت</span></div><div class="stat"><b>${r.tab_switches}</b><span>مرات الخروج</span></div></div>
-   <div class="card"><label>درجة المقالي النهائية (من ${CONFIG.ESSAY_MARKS})</label><input id="rv-sc" type="number" min="0" max="${CONFIG.ESSAY_MARKS}" step="0.5" value="${r.teacher_essay_score??""}" placeholder="الآلي: ${r1(+r.essay_score)}">
-    <label>ملاحظة للطالب</label><textarea id="rv-nt" style="min-height:70px">${esc(r.teacher_note||"")}</textarea>
-    <div class="row" style="margin-top:12px"><button class="btn" id="rv-save">حفظ التقييم</button><button class="btn wa" id="rv-wa">إرسال للطالب واتساب</button></div><div id="rv-st"></div></div>
-   ${mcqHTML}${body}`,true);
-  $("rv-x").onclick=closeModal;
-  const val=()=>{ const v=$("rv-sc").value; return v===""?null:Math.min(CONFIG.ESSAY_MARKS,Math.max(0,+v)); };
+  if(error){ alert(dbErr(error)); return; }
+  const ar=await sb.from("hx_attempts_archive").select("archived_at,data").eq("user_id",r.user_id).eq("exam_id",CONFIG.EXAM_ID).order("archived_at",{ascending:false});
+  const arc=ar.data||[];
+  const byQ={}; (r.answers||[]).forEach(a=>{ byQ[a.q]=a.chosen; });
+  const essArr=r.essays||[], saved=r.teacher_marks||{};
+  const essHTML=E.map((e,ei)=>{
+    const x=essArr.find(z=>z.id!=null?z.id===e.n:z.idx===ei); const t=x?(x.text||""):""; const ev=evalEssay(e,t);
+    return `<div class="card"><div class="who-row"><p class="qt" style="flex:1;min-width:240px">${ei+1}. ${esc(e.q)}</p><div style="min-width:170px"><label style="margin:0 0 4px">درجة السؤال (من ${e.m})</label><input class="em" type="number" data-ei="${ei}" data-max="${e.m}" data-auto="${r1(ev.marks)}" min="0" max="${e.m}" step="0.25" value="${saved[ei]??""}" placeholder="آلي: ${r1(ev.marks)}"></div></div>${x&&x.revealed?'<div class="lockn">⚠️ الطالب فتح النموذج قبل التسليم</div>':""}${compareHTML(e,t)}</div>`;
+  }).join("");
+  const arcHTML=arc.length?`<div class="card"><h3 class="gold">محاولات سابقة (${arc.length})</h3>${arc.map(a=>{ const rs=(a.data||{}).result; return `<div class="sub">${new Date(a.archived_at).toLocaleString("ar-EG")} · ${rs?"اختيار: "+r1(+rs.mcq_score)+(rs.teacher_essay_score!=null?" · نهائي: "+r1(fin(rs)):""):"لم يسلّم"}</div>`; }).join("")}</div>`:"";
+  const g=graded(r);
+  modal(`<div class="who-row"><div><h3 class="gold">${esc(r.student_name)}</h3><div class="sub"><span dir="ltr">${esc(r.phone||"")}</span>${r.grp?" · "+esc(r.grp):""} · سلّم: ${new Date(r.created_at).toLocaleString("ar-EG")}</div></div><div style="display:flex;gap:8px"><button class="btn ghost sm" id="rv-pdf">📄 تقرير PDF</button><button class="btn ghost sm" id="rv-x">إغلاق النافذة</button></div></div>
+   <div style="margin:8px 0">${r.closed_by_admin?bdg("أُغلق بواسطة المدرس","b-prog")+" ":""}${r.late?bdg("متأخر","b-prog")+" ":""}${r.auto_submitted?bdg("تسليم تلقائي","b-none")+" ":""}${g?bdg("تم التصحيح","b-done"):bdg("المقالي لم يُصحَّح","b-prog")}</div>
+   <div class="stats s5"><div class="stat"><b style="font-size:26px">${g?r1(fin(r)):"–"}</b><span>الدرجة النهائية / 100</span></div><div class="stat"><b>${r1(+r.mcq_score)}</b><span>الاختيار / ${CONFIG.MCQ_MARKS} (تلقائي)</span></div><div class="stat"><b id="rv-tot">${g?r1(+r.teacher_essay_score):"–"}</b><span>المقالي / ${CONFIG.ESSAY_MARKS} (يدوي)</span></div><div class="stat"><b>${mmss(r.time_spent_sec)}</b><span>الوقت</span></div><div class="stat"><b>${r.tab_switches}</b><span>مرات الخروج</span></div></div>
+   <div class="card" style="margin-top:14px"><h3 class="gold">تصحيح المقالي اليدوي</h3><div class="sub">ادّي كل سؤال درجته (من تحت). المجموع بيتحسب لوحده، والطالب هيشوفه أول ما تحفظ. تقدر تملى التقدير الآلي كاقتراح وتعدّل عليه.</div>
+    <label>ملاحظة للطالب (اختياري)</label><textarea id="rv-nt" style="min-height:70px">${esc(r.teacher_note||"")}</textarea>
+    <div class="row" style="margin-top:12px"><button class="btn" id="rv-save">💾 حفظ التصحيح</button><button class="btn ghost" id="rv-auto">ملء بالتقدير الآلي</button><button class="btn wa" id="rv-wa">إرسال للطالب واتساب</button><button class="btn ghost" id="rv-ro">محاولة جديدة</button></div><div id="rv-st"></div></div>
+   ${essHTML}${qaBlock(i=>byQ[i+1]??null)}${arcHTML}`,true);
+  $("rv-x").onclick=closeModal; wireQa();
+  const inputs=()=>[...document.querySelectorAll(".em")];
+  const clamp=i=>Math.min(+i.dataset.max,Math.max(0,+i.value));
+  const sum=()=>Math.round(inputs().reduce((a,i)=>a+(i.value===""?0:clamp(i)),0)*100)/100;
+  const upd=()=>{ $("rv-tot").textContent=inputs().some(i=>i.value!=="")?r1(sum()):"–"; };
+  inputs().forEach(i=>i.oninput=upd); upd();
+  $("rv-auto").onclick=()=>{ inputs().forEach(i=>{ i.value=Math.round(+i.dataset.auto*4)/4; }); upd(); };
   $("rv-save").onclick=async()=>{
-    const {error:er}=await sb.from(CONFIG.TABLE).update({teacher_essay_score:val(),teacher_note:$("rv-nt").value||null}).eq("id",id);
-    $("rv-st").className="status "+(er?"err":"ok"); $("rv-st").textContent=er?er.message:"✅ تم حفظ التقييم"; if(!er) loadAll();
+    const marks={}; let any=false;
+    inputs().forEach(i=>{ if(i.value!==""){ any=true; marks[i.dataset.ei]=Math.round(clamp(i)*100)/100; } });
+    const total=any?sum():null;
+    const {error:er}=await sb.from(CONFIG.TABLE).update({teacher_essay_score:total,teacher_marks:any?marks:null,teacher_note:$("rv-nt").value||null}).eq("id",id);
+    $("rv-st").className="status "+(er?"err":"ok"); $("rv-st").textContent=er?dbErr(er):"✅ تم حفظ التصحيح"+(any?" — المقالي: "+r1(total)+" / "+CONFIG.ESSAY_MARKS:" (من غير درجات = لسه مش مصحَّح)"); if(!er) loadAll(true);
   };
   $("rv-wa").onclick=()=>{
-    const es=val(), total=(+r.mcq_score)+(es!=null?es:+r.essay_score);
-    const msg=`📜 نتيجة امتحان التاريخ – الوحدة الأولى\n👤 ${r.student_name}\n✅ الدرجة النهائية: ${r1(total)} / 100\n• الاختيار: ${r1(+r.mcq_score)}\n• المقالي: ${r1(es!=null?es:+r.essay_score)}`+($("rv-nt").value?`\n📝 ملاحظة: ${$("rv-nt").value}`:"")+`\n\nبرعاية المطور: ${CONFIG.SPONSOR}`;
+    const any=inputs().some(i=>i.value!==""), es=any?sum():null;
+    const msg=`📜 نتيجة امتحان التاريخ – الوحدة الأولى\n👤 ${r.student_name}\n• الاختيار: ${r1(+r.mcq_score)} / ${CONFIG.MCQ_MARKS}\n• المقالي: ${es!=null?r1(es)+" / "+CONFIG.ESSAY_MARKS:"لسه بيتصحح"}`+(es!=null?`\n✅ الدرجة النهائية: ${r1(+r.mcq_score+es)} / 100`:"")+($("rv-nt").value?`\n📝 ملاحظة: ${$("rv-nt").value}`:"")+`\n\nبرعاية المطور: ${CONFIG.SPONSOR}`;
     window.open("https://wa.me/"+toIntl(r.phone||"")+"?text="+encodeURIComponent(msg),"_blank");
+  };
+  $("rv-ro").onclick=()=>reopenExam(r.user_id);
+  $("rv-pdf").onclick=()=>studentPDF(r);
+}
+
+/* ============ متابعة مباشرة لطالب جاري امتحانه ============ */
+async function reviewLive(uid){
+  const x=ROWS.find(y=>y.uid===uid);
+  const {data:se,error}=await sb.from("hx_sessions").select("*").eq("user_id",uid).eq("exam_id",CONFIG.EXAM_ID).maybeSingle();
+  if(error){ alert(dbErr(error)); return; }
+  const pr=(se&&se.progress)||{}, ans=pr.ans||{}, es=pr.es||{};
+  const mins=se?Math.max(0,Math.round((Date.now()-Date.parse(se.started_at))/60000)):0;
+  const left=Math.max(0,CONFIG.DURATION_MIN-mins);
+  const body=E.map((e,i)=>{ const t=es[i]||""; return t.trim()?`<div class="card"><p class="qt">${esc(e.q)}</p>${compareHTML(e,t)}</div>`:""; }).join("");
+  modal(`<div class="who-row"><div><h3 class="gold">${esc(x.name)} — جاري امتحانه</h3><div class="sub"><span dir="ltr">${esc(x.phone)}</span>${x.grp?" · "+esc(x.grp):""} · بدأ من ${mins} دقيقة · المتبقي تقريبًا ${left} دقيقة · خروج من الصفحة: ${pr.sw||0}</div></div><button class="btn ghost sm" id="lv-x">إغلاق النافذة</button></div>
+   <div class="status wait" style="margin-top:10px">البيانات من آخر حفظ تلقائي للطالب (بيتحفظ كل بضع ثوانٍ).</div>
+   <div class="row" style="margin:10px 0"><button class="btn wa" id="lv-wa">واتساب للطالب</button><button class="btn ghost" id="lv-cl" style="color:var(--bad);border-color:var(--bad)">إغلاق الامتحان عليه</button><button class="btn ghost" id="lv-ro">محاولة جديدة</button></div>
+   ${qaBlock(i=>ans[i]??null)}${body}`,true);
+  $("lv-x").onclick=closeModal; wireQa();
+  $("lv-wa").onclick=()=>window.open("https://wa.me/"+toIntl(x.phone),"_blank");
+  $("lv-cl").onclick=()=>closeExam(uid);
+  $("lv-ro").onclick=()=>reopenExam(uid);
+}
+
+/* ============ طباعة / PDF ============ */
+function printHTML(html){
+  const a=$("print-area"); a.innerHTML=html; document.body.classList.add("printing");
+  const done=()=>{ document.body.classList.remove("printing"); a.innerHTML=""; window.removeEventListener("afterprint",done); };
+  window.addEventListener("afterprint",done); setTimeout(()=>window.print(),60);
+}
+const pdfHead=t=>`<div class="sp">برعاية المطور : ${esc(CONFIG.SPONSOR)}</div><h1>${esc(t)}</h1><div class="pm">امتحان التاريخ – الوحدة الأولى · ${new Date().toLocaleString("ar-EG")}</div>`;
+function exportPDF(){
+  const L=filtered(), SL={done:"سلّم",prog:"جاري",none:"لم يبدأ"};
+  const fin2=L.filter(x=>x.res&&graded(x.res)).map(x=>fin(x.res));
+  const avg=fin2.length?r1(fin2.reduce((a,b)=>a+b,0)/fin2.length):"–";
+  const rows=L.map((x,i)=>{ const r=x.res; return `<tr><td>${i+1}</td><td>${esc(x.name)}</td><td dir="ltr">${esc(x.phone)}</td><td>${esc(x.grp)}</td><td>${SL[x.st]}</td><td>${r?r1(+r.mcq_score):"–"}</td><td>${r?(graded(r)?r1(+r.teacher_essay_score):"لم يُصحَّح"):"–"}</td><td><b>${r&&graded(r)?r1(fin(r)):"–"}</b></td><td>${r?mmss(r.time_spent_sec):"–"}</td><td>${r?r.tab_switches:"–"}</td></tr>`; }).join("");
+  printHTML(pdfHead("كشف درجات الطلاب")+`<div class="pm">عدد الطلاب: ${L.length} · المصحَّح: ${fin2.length} · متوسط الدرجة النهائية: ${avg}</div><table><tr><th>#</th><th>الاسم</th><th>الموبايل</th><th>المجموعة</th><th>الحالة</th><th>الاختيار /50</th><th>المقالي /50</th><th>النهائي /100</th><th>الوقت</th><th>خروج</th></tr>${rows}</table>`);
+}
+function studentPDF(r){
+  const byQ={}; (r.answers||[]).forEach(a=>{ byQ[a.q]=a.chosen; });
+  const bad=Q.map((q,i)=>({i,q,ch:byQ[i+1]??null})).filter(x=>x.ch!==x.q[1]);
+  const marks=r.teacher_marks||{};
+  const ess=E.map((e,ei)=>{ const x=(r.essays||[]).find(z=>z.id!=null?z.id===e.n:z.idx===ei); return `<tr><td>${ei+1}</td><td>${esc(e.q)}</td><td>${esc(x?x.text:"")}</td><td>${marks[ei]!=null?marks[ei]:"–"} / ${e.m}</td></tr>`; }).join("");
+  printHTML(pdfHead("تقرير الطالب: "+r.student_name)+`<div class="pm">${esc(r.phone||"")}${r.grp?" · "+esc(r.grp):""}</div>
+   <p><b>الاختيار:</b> ${r1(+r.mcq_score)} / ${CONFIG.MCQ_MARKS} &nbsp; <b>المقالي:</b> ${graded(r)?r1(+r.teacher_essay_score):"لم يُصحَّح"} / ${CONFIG.ESSAY_MARKS} &nbsp; <b>النهائي:</b> ${graded(r)?r1(fin(r)):"–"} / 100 &nbsp; <b>الوقت:</b> ${mmss(r.time_spent_sec)} &nbsp; <b>خروج:</b> ${r.tab_switches}</p>
+   ${r.teacher_note?`<p><b>ملاحظة المدرس:</b> ${esc(r.teacher_note)}</p>`:""}
+   <h3>أسئلة الاختيار الغلط أو غير المجابة (${bad.length})</h3><table><tr><th>#</th><th>السؤال</th><th>إجابة الطالب</th><th>الصحيحة</th></tr>${bad.map(x=>`<tr><td>${x.i+1}</td><td>${esc(x.q[0])}</td><td>${x.ch==null?"لم يجب":esc(x.ch)}</td><td>${esc(x.q[1])}</td></tr>`).join("")||'<tr><td colspan="4">لا توجد أخطاء</td></tr>'}</table>
+   <h3>الأسئلة المقالية</h3><table><tr><th>#</th><th>السؤال</th><th>إجابة الطالب</th><th>الدرجة</th></tr>${ess}</table>`);
+}
+$("d-pdf").onclick=exportPDF;
+
+/* ============ حذف ============ */
+function deleteMenu(uid){
+  const x=ROWS.find(y=>y.uid===uid);
+  modal(`<h3 class="gold">حذف: ${esc(x.name)}</h3><p class="sub" style="margin:8px 0 14px">اختار نوع الحذف. العمليتين مش بيترجعوا.</p>
+   <div class="row" style="flex-direction:column"><button class="btn ghost" id="dl-res" style="color:var(--bad);border-color:var(--bad)" ${x.st==="none"?"disabled":""}>🗑 حذف نتيجته ومحاولته فقط (الحساب يفضل)</button><button class="btn" id="dl-all" style="background:linear-gradient(135deg,#fb7185,#be123c);color:#fff">⛔ حذف الطالب نهائيًا (الحساب وكل بياناته)</button><button class="btn ghost" id="dl-x">إلغاء</button></div>`);
+  $("dl-x").onclick=closeModal;
+  $("dl-res").onclick=async()=>{ if(!confirm("هتحذف نتيجة «"+x.name+"» ومحاولته نهائيًا. متأكد؟")) return; const {error}=await sb.rpc("hx_admin_delete_result",{p_user:uid,p_exam_id:CONFIG.EXAM_ID}); if(error){ alert(dbErr(error)); return; } closeModal(); await loadAll(); };
+  $("dl-all").onclick=async()=>{ if(!confirm("هتحذف الطالب «"+x.name+"» وحسابه وكل بياناته نهائيًا. متأكد؟")) return; const {error}=await sb.rpc("hx_admin_delete_student",{p_user:uid}); if(error){ alert(dbErr(error)); return; } closeModal(); await loadAll(); };
+}
+$("d-wipe").onclick=async()=>{
+  const t=prompt("تحذير: هتمسح نتائج وجلسات كل الطلاب في الامتحان ده نهائيًا (الحسابات تفضل).\nللتأكيد اكتب كلمة: مسح");
+  if(t!=="مسح") return;
+  const {data,error}=await sb.rpc("hx_admin_delete_all_results",{p_exam_id:CONFIG.EXAM_ID});
+  if(error){ alert(dbErr(error)); return; }
+  alert("تم مسح "+(data||0)+" نتيجة."); await loadAll();
+};
+
+/* ============ تبويب تصحيح المقالي ============ */
+function drawGrading(){
+  const done=ROWS.filter(x=>x.st==="done");
+  const L=done.filter(x=>!graded(x.res)).sort((a,b)=>new Date(a.res.created_at)-new Date(b.res.created_at));
+  $("t-gr").textContent=L.length?"("+L.length+")":"";
+  $("p-gr").innerHTML=`<div class="card"><h3 class="gold">تصحيح المقالي اليدوي</h3><div class="sub" style="margin:6px 0 12px">الطالب بيشوف درجة الاختيار تلقائيًا، والمقالي درجته من عندك. اضغط «تصحيح» وادّي كل سؤال درجته، وبعد الحفظ بتظهر للطالب.</div>
+   <div class="stats s4" style="grid-template-columns:repeat(2,1fr)"><div class="stat"><b style="color:var(--warn)">${L.length}</b><span>في انتظار التصحيح</span></div><div class="stat"><b style="color:var(--ok)">${done.length-L.length}</b><span>تم تصحيحهم</span></div></div></div>
+   <div class="card tbl"><table><tr><th>#</th><th>الاسم</th><th>الموبايل</th><th>المجموعة</th><th>الاختيار /50</th><th>سلّم في</th><th></th></tr>${L.map((x,i)=>`<tr><td>${i+1}</td><td><b>${esc(x.name)}</b></td><td dir="ltr">${esc(x.phone)}</td><td>${esc(x.grp)}</td><td>${r1(+x.res.mcq_score)}</td><td>${new Date(x.res.created_at).toLocaleString("ar-EG")}</td><td><button class="btn sm" data-gr="${x.res.id}">تصحيح</button></td></tr>`).join("")||'<tr><td colspan="7" class="sub">مفيش مقالي في انتظار التصحيح 🎉</td></tr>'}</table></div>`;
+}
+$("p-gr").onclick=e=>{ const b=e.target.closest("[data-gr]"); if(b) reviewRow(b.dataset.gr); };
+
+/* ============ تبويب الطلبات (مراجعة / إعادة) ============ */
+function drawRequests(){
+  const pend=REQ.filter(q=>q.status==="pending");
+  $("t-rq").textContent=pend.length?"("+pend.length+")":"";
+  const who=uid=>ROWS.find(r=>r.uid===uid)||{name:"طالب محذوف",phone:"",grp:""};
+  const item=q=>{ const s=who(q.user_id), r=s.res;
+    return `<div class="card"><div class="who-row"><div><b>${esc(s.name)}</b> <span class="sub" dir="ltr">${esc(s.phone)}</span>${s.grp?' <span class="sub">· '+esc(s.grp)+"</span>":""}<div class="sub">${new Date(q.created_at).toLocaleString("ar-EG")}${r?" · اختيار: "+r1(+r.mcq_score)+" / 50":""}</div></div>${q.status==="pending"?bdg("قيد المراجعة","b-prog"):q.status==="approved"?bdg("تمت الموافقة","b-done"):bdg("مرفوض","b-none")}</div>
+     <p style="margin:10px 0;white-space:pre-wrap">${esc(q.message||"")}</p>
+     ${q.status==="pending"?`<div class="row"><button class="btn" data-ap="${q.id}">✔ موافقة (فتح محاولة جديدة)</button><button class="btn ghost" data-rj="${q.id}" style="color:var(--bad);border-color:var(--bad)">✖ رفض</button>${r?`<button class="btn ghost" data-rv2="${r.id}">مراجعة نتيجته</button>`:""}</div>`:(q.admin_note?`<div class="sub">ملاحظتك: ${esc(q.admin_note)}</div>`:"")}</div>`; };
+  $("p-rq").innerHTML=REQ.length?REQ.map(item).join(""):'<div class="card"><div class="sub">لا توجد طلبات من الطلاب حتى الآن.</div></div>';
+}
+async function decideReq(id,approve){
+  let note=null;
+  if(!approve){ note=prompt("سبب الرفض / ملاحظة للطالب (اختياري):",""); if(note===null) return; }
+  else if(!confirm("هتوافق: هيتفتح للطالب محاولة جديدة والمحاولة الحالية بتتأرشف. متأكد؟")) return;
+  const {error}=await sb.rpc("hx_admin_decide_request",{p_id:id,p_approve:approve,p_note:note});
+  if(error){ alert(dbErr(error)); return; }
+  await loadAll();
+}
+$("p-rq").onclick=e=>{
+  const ap=e.target.closest("[data-ap]"), rj=e.target.closest("[data-rj]"), rv=e.target.closest("[data-rv2]");
+  if(ap) decideReq(+ap.dataset.ap,true); if(rj) decideReq(+rj.dataset.rj,false); if(rv) reviewRow(rv.dataset.rv2);
+};
+
+/* ============ تبويب المدرسين ============ */
+async function loadTeachers(){
+  const box=$("p-tc"); box.innerHTML='<div class="card"><div class="status wait">⏳ جاري التحميل...</div></div>';
+  const [a,i]=await Promise.all([sb.from("hx_admins").select("user_id,email").order("email"),sb.from("hx_admin_invites").select("email,created_at").order("created_at",{ascending:false})]);
+  if(a.error){ box.innerHTML='<div class="card"><div class="status err">'+esc(dbErr(a.error))+"</div></div>"; return; }
+  const admins=a.data||[], inv=i.error?[]:(i.data||[]);
+  box.innerHTML=`<div class="card"><h3 class="gold">➕ إضافة مدرس</h3><div class="sub" style="margin:6px 0 10px">اكتب إيميل المدرس. أول ما يفتح صفحة لوحة التحكم ويسجّل حساب جديد بنفس الإيميل (تبويب «حساب مدرس جديد») بيتفتح له تلقائيًا من غير أي موافقة تانية.</div>
+    <div class="fl"><input id="tc-mail" dir="ltr" placeholder="teacher@gmail.com"><button class="btn" id="tc-add">إضافة</button></div><div id="tc-st"></div></div>
+   <div class="card"><h3 class="gold">المدرسين الحاليين (${admins.length})</h3><div class="tbl" style="max-height:none"><table><tr><th>الإيميل</th><th></th></tr>${admins.map(x=>`<tr><td dir="ltr">${esc(x.email||"(بدون إيميل مسجّل)")}${x.user_id===ME.id?' <span class="badge b-done">أنت</span>':""}</td><td>${x.user_id===ME.id?"":`<button class="btn ghost sm" data-rma="${x.user_id}" style="color:var(--bad);border-color:var(--bad)">إزالة</button>`}</td></tr>`).join("")}</table></div></div>
+   <div class="card"><h3 class="gold">دعوات في الانتظار (${inv.length})</h3><div class="tbl" style="max-height:none"><table><tr><th>الإيميل</th><th>أُضيف في</th><th></th></tr>${inv.map(x=>`<tr><td dir="ltr">${esc(x.email)}</td><td>${new Date(x.created_at).toLocaleString("ar-EG")}</td><td><button class="btn ghost sm" data-rmi="${esc(x.email)}">إلغاء الدعوة</button></td></tr>`).join("")||'<tr><td colspan="3" class="sub">لا توجد دعوات.</td></tr>'}</table></div></div>`;
+  $("tc-add").onclick=async()=>{
+    const m=$("tc-mail").value.trim(), st=$("tc-st");
+    const {data,error}=await sb.rpc("hx_admin_add_invite",{p_email:m});
+    if(error){ st.className="status err"; st.textContent=/invalid email/i.test(error.message)?"الإيميل غير صحيح.":/student account/i.test(error.message)?"الإيميل ده حساب طالب.":dbErr(error); return; }
+    st.className="status ok"; st.textContent=data==="promoted"?"✅ الإيميل كان متسجّل، واتفعّل مدرس فورًا.":"✅ تمت الدعوة. أول ما يسجّل بالإيميل ده هيدخل لوحة التحكم.";
+    setTimeout(loadTeachers,900);
+  };
+  box.onclick=async e=>{
+    const rma=e.target.closest("[data-rma]"), rmi=e.target.closest("[data-rmi]");
+    if(rma){ if(!confirm("تشيل صلاحية المدرس ده؟")) return; const {error}=await sb.rpc("hx_admin_remove_admin",{p_user:rma.dataset.rma}); if(error){ alert(dbErr(error)); return; } loadTeachers(); }
+    if(rmi){ const {error}=await sb.rpc("hx_admin_remove_invite",{p_email:rmi.dataset.rmi}); if(error){ alert(dbErr(error)); return; } loadTeachers(); }
   };
 }
 
@@ -661,7 +886,7 @@ function drawQuestions(){
 
 /* ============ تصدير ============ */
 $("d-csv").onclick=()=>{
-  const rows=[["الاسم","الموبايل","المجموعة","الحالة","اختيار","مقالي","الإجمالي","الوقت(ث)","خروج","وقت التسليم"]].concat(ROWS.map(x=>{const r=x.res;return [x.name,x.phone,x.grp,{done:"سلّم",prog:"جاري",none:"لم يبدأ"}[x.st],r?r.mcq_score:"",r?(r.teacher_essay_score!=null?r.teacher_essay_score:r.essay_score):"",r?r1(fin(r)):"",r?r.time_spent_sec:"",r?r.tab_switches:"",r?r.created_at:""]}));
+  const rows=[["الاسم","الموبايل","المجموعة","الحالة","اختيار","مقالي","الإجمالي","الوقت(ث)","خروج","وقت التسليم"]].concat(ROWS.map(x=>{const r=x.res;return [x.name,x.phone,x.grp,{done:"سلّم",prog:"جاري",none:"لم يبدأ"}[x.st],r?r.mcq_score:"",r?(r.teacher_essay_score!=null?r.teacher_essay_score:"لم يُصحَّح"):"",r?r1(fin(r)):"",r?r.time_spent_sec:"",r?r.tab_switches:"",r?r.created_at:""]}));
   const csv="\ufeff"+rows.map(r=>r.map(c=>'"'+String(c??"").replace(/"/g,'""')+'"').join(",")).join("\n");
   const a=document.createElement("a"); a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv;charset=utf-8"})); a.download="students-"+CONFIG.EXAM_ID+".csv"; a.click();
 };
