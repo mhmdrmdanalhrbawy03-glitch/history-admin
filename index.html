@@ -285,7 +285,7 @@ select{width:100%;padding:13px 15px;border-radius:14px;border:1.5px solid var(--
   <div class="card">
     <div class="who-row"><div><h2 class="gold">📊 لوحة تحكم المدرس</h2><div class="sub" id="d-upd"></div></div>
       <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn ghost sm" id="d-ref">🔄 تحديث</button><button class="btn ghost sm" id="d-csv">⬇ CSV</button><button class="btn ghost sm" id="d-pdf">📄 PDF</button><button class="btn ghost sm" id="d-wipe" style="color:var(--bad);border-color:var(--bad)">🗑 مسح كل النتائج</button><button class="btn ghost sm" id="d-theme">◐</button><button class="btn ghost sm" id="d-out">خروج</button></div></div>
-    <div class="rt" style="margin:14px 0 0"><button class="tab on" data-tb="p-ov">نظرة عامة</button><button class="tab" data-tb="p-st">الطلاب</button><button class="tab" data-tb="p-gr">تصحيح المقالي <b id="t-gr"></b></button><button class="tab" data-tb="p-rq">الطلبات <b id="t-rq"></b></button><button class="tab" data-tb="p-q">تحليل الأسئلة</button><button class="tab" data-tb="p-cn">السنتر <b id="t-cn"></b></button><button class="tab" data-tb="p-tc">المدرسين <b id="t-tc"></b></button></div>
+    <div class="rt" style="margin:14px 0 0"><button class="tab on" data-tb="p-ov">نظرة عامة</button><button class="tab" data-tb="p-st">الطلاب</button><button class="tab" data-tb="p-gr">تصحيح المقالي <b id="t-gr"></b></button><button class="tab" data-tb="p-rq">الطلبات <b id="t-rq"></b></button><button class="tab" data-tb="p-ky">نموذج الاختيار والإعدادات</button><button class="tab" data-tb="p-q">تحليل الأسئلة</button><button class="tab" data-tb="p-cn">السنتر <b id="t-cn"></b></button><button class="tab" data-tb="p-tc">المدرسين <b id="t-tc"></b></button></div>
   </div>
   <div id="d-health" class="status err hide"></div>
   <div id="p-ov"></div>
@@ -295,6 +295,7 @@ select{width:100%;padding:13px 15px;border-radius:14px;border:1.5px solid var(--
   </div>
   <div id="p-gr" class="hide"></div>
   <div id="p-rq" class="hide"></div>
+  <div id="p-ky" class="hide"></div>
   <div id="p-q" class="hide"></div>
   <div id="p-cn" class="hide"></div>
   <div id="p-tc" class="hide"></div>
@@ -620,21 +621,28 @@ async function enter(user){
 $("d-out").onclick=async()=>{ try{await sb.auth.signOut()}catch(e){} location.reload(); };
 
 /* ============ تحميل البيانات ============ */
-let ROWS=[], RES=[], REQ=[], CEN=[];
+let ROWS=[], RES=[], REQ=[], CEN=[], KEYS=[], SET={show_model_before_submit:true,show_model_after_grading:true,show_mcq_correct:true}, KEYLOADED=false, KEY_DIRTY=false, KY_MSG=null;
+const keyOf=i=>KEYS[i]||{correct:Q[i][1],alt:[],voided:false};
+const isRight=(i,ch)=>{ const k=keyOf(i); return !!k.voided||(ch!=null&&(ch===k.correct||(k.alt||[]).includes(ch))); };
 const fin=r=>(+r.mcq_score||0)+(r.teacher_essay_score!=null?+r.teacher_essay_score:(+r.essay_score||0));
 const graded=r=>r.teacher_essay_score!=null;
 async function loadAll(silent){
   if(!silent) $("p-ov").innerHTML='<div class="card"><div class="status wait">⏳ جاري تحميل البيانات...</div></div>';
-  const [p,s,r,rq,cn]=await Promise.all([
+  const [p,s,r,rq,cn,ky,st]=await Promise.all([
     sb.from("hx_profiles").select("id,full_name,phone,grp,created_at").order("created_at",{ascending:false}).limit(3000),
     sb.from("hx_sessions").select("user_id,started_at,progress").eq("exam_id",CONFIG.EXAM_ID).limit(3000),
     sb.from(CONFIG.TABLE).select("id,user_id,student_name,phone,grp,mcq_score,essay_score,teacher_essay_score,time_spent_sec,tab_switches,auto_submitted,created_at,lessons,answers,late,closed_by_admin").eq("exam_id",CONFIG.EXAM_ID).limit(3000),
     sb.from("hx_requests").select("*").eq("exam_id",CONFIG.EXAM_ID).order("created_at",{ascending:false}).limit(1000),
-    sb.from("hx_center").select("*").order("created_at",{ascending:false}).limit(5000)
+    sb.from("hx_center").select("*").order("created_at",{ascending:false}).limit(5000),
+    sb.from("hx_keys").select("q_no,correct,alt,voided").eq("exam_id",CONFIG.EXAM_ID).order("q_no"),
+    sb.from("hx_settings").select("*").eq("id",1).maybeSingle()
   ]);
   const err=p.error||s.error||r.error;
   if(err){ $("p-ov").innerHTML='<div class="card"><div class="status err">'+esc(err.message)+'</div></div>'; return; }
   RES=r.data||[]; REQ=rq.error?[]:(rq.data||[]); CEN=cn.error?[]:(cn.data||[]);
+  KEYS=Q.map(q=>({correct:q[1],alt:[],voided:false})); KEYLOADED=!ky.error&&Array.isArray(ky.data)&&ky.data.length>0;
+  if(KEYLOADED) ky.data.forEach(k=>{ if(KEYS[k.q_no-1]) KEYS[k.q_no-1]={correct:k.correct,alt:Array.isArray(k.alt)?k.alt:[],voided:!!k.voided}; });
+  if(st&&!st.error&&st.data) SET=st.data;
   const rb=Object.fromEntries(RES.map(x=>[x.user_id,x])), sbm=Object.fromEntries((s.data||[]).map(x=>[x.user_id,x]));
   ROWS=(p.data||[]).map(x=>{ const res=rb[x.id], se=sbm[x.id]; return {uid:x.id,name:x.full_name,phone:x.phone,grp:x.grp||"",joined:x.created_at,st:res?"done":se?"prog":"none",res,started:se?.started_at,prog:se?.progress}; });
   const cm=new Map(CEN.map(c=>[c.phone,c])); ROWS.forEach(x=>{ x.cen=cm.get(x.phone)||null; });
@@ -646,10 +654,10 @@ async function loadAll(silent){
 $("d-ref").onclick=loadAll;
 document.querySelectorAll("[data-tb]").forEach(b=>b.onclick=()=>{
   document.querySelectorAll("[data-tb]").forEach(x=>x.classList.toggle("on",x===b));
-  ["p-ov","p-st","p-gr","p-rq","p-q","p-cn","p-tc"].forEach(id=>$(id).classList.toggle("hide",id!==b.dataset.tb));
+  ["p-ov","p-st","p-gr","p-rq","p-q","p-ky","p-cn","p-tc"].forEach(id=>$(id).classList.toggle("hide",id!==b.dataset.tb));
   if(b.dataset.tb==="p-tc") loadTeachers();
 });
-function drawAll(){ drawOverview(); drawStudents(); drawGrading(); drawRequests(); drawQuestions(); drawCenter(); refreshTcBadge(); }
+function drawAll(){ drawOverview(); drawStudents(); drawGrading(); drawRequests(); drawQuestions(); drawCenter(); drawKeys(); refreshTcBadge(); }
 async function refreshTcBadge(){ try{ const r=await sb.from("hx_admin_requests").select("id").eq("status","pending"); if(!r.error) $("t-tc").textContent=(r.data&&r.data.length)?"("+r.data.length+")":""; }catch(e){} }
 
 /* ============ نظرة عامة ============ */
@@ -738,13 +746,13 @@ async function reopenExam(uid){
 
 /* ============ جدول إجابات الاختيار (صح / غلط / لم يجب) ============ */
 function qaBlock(chosenOf){
-  const items=Q.map((q,i)=>{ const ch=chosenOf(i); return {i,q,ch,st:ch==null?"na":(ch===q[1]?"ok":"bad")}; });
+  const items=Q.map((q,i)=>{ const ch=chosenOf(i); return {i,q,ch,st:keyOf(i).voided?"ok":(ch==null?"na":(isRight(i,ch)?"ok":"bad"))}; });
   const c={ok:0,bad:0,na:0}; items.forEach(x=>c[x.st]++);
   const lab={ok:bdg("صح","b-done"),bad:'<span class="badge" style="background:rgba(251,113,133,.18);color:var(--bad)">غلط</span>',na:bdg("لم يجب","b-none")};
   return `<div class="card"><h3 class="gold" style="margin-bottom:10px">إجابات الاختيار من متعدد</h3>
    <div class="stats s4"><div class="stat"><b style="color:var(--ok)">${c.ok}</b><span>صح</span></div><div class="stat"><b style="color:var(--bad)">${c.bad}</b><span>غلط</span></div><div class="stat"><b style="color:var(--mute)">${c.na}</b><span>لم يجب</span></div><div class="stat"><b>${Q.length-c.na}/${Q.length}</b><span>اللي جاوب عليه</span></div></div>
    <div class="row" style="margin:12px 0"><button class="btn ghost sm" data-qf="all">الكل</button><button class="btn ghost sm" data-qf="bad">الغلط فقط</button><button class="btn ghost sm" data-qf="na">اللي لم يجب عليه</button><button class="btn ghost sm" data-qf="ok">الصح فقط</button></div>
-   <div class="tbl" style="max-height:50vh"><table id="qa-t"><tr><th>#</th><th>السؤال</th><th>إجابة الطالب</th><th>الإجابة الصحيحة</th><th>الحالة</th></tr>${items.map(x=>`<tr class="qa qa-${x.st}"><td>${x.i+1}</td><td style="white-space:normal;min-width:260px">${esc(x.q[0])}</td><td style="white-space:normal;min-width:160px">${x.ch==null?'<span class="sub">— لم يجب —</span>':esc(x.ch)}</td><td style="white-space:normal;min-width:160px">${esc(x.q[1])}</td><td>${lab[x.st]}</td></tr>`).join("")}</table></div></div>`;
+   <div class="tbl" style="max-height:50vh"><table id="qa-t"><tr><th>#</th><th>السؤال</th><th>إجابة الطالب</th><th>الإجابة الصحيحة</th><th>الحالة</th></tr>${items.map(x=>`<tr class="qa qa-${x.st}"><td>${x.i+1}</td><td style="white-space:normal;min-width:260px">${esc(x.q[0])}</td><td style="white-space:normal;min-width:160px">${x.ch==null?'<span class="sub">— لم يجب —</span>':esc(x.ch)}</td><td style="white-space:normal;min-width:160px">${esc(keyOf(x.i).correct)}${(keyOf(x.i).alt||[]).length?' <span class="sub">(+ بدائل مقبولة)</span>':""}${keyOf(x.i).voided?' <span class="badge b-prog">ملغي – محسوب صح للكل</span>':""}</td><td>${lab[x.st]}</td></tr>`).join("")}</table></div></div>`;
 }
 function wireQa(){
   document.querySelectorAll("[data-qf]").forEach(b=>b.onclick=()=>{
@@ -781,7 +789,8 @@ async function reviewRow(id){
   const g=graded(r);
   modal(`<div class="who-row"><div><h3 class="gold">${esc(r.student_name)}</h3><div class="sub"><span dir="ltr">${esc(r.phone||"")}</span>${r.grp?" · "+esc(r.grp):""} · سلّم: ${new Date(r.created_at).toLocaleString("ar-EG")}</div></div><div style="display:flex;gap:8px"><button class="btn ghost sm" id="rv-pdf">📄 تقرير PDF</button><button class="btn ghost sm" id="rv-x">إغلاق النافذة</button></div></div>
    <div style="margin:8px 0">${r.closed_by_admin?bdg("أُغلق بواسطة المدرس","b-prog")+" ":""}${r.late?bdg("متأخر","b-prog")+" ":""}${r.auto_submitted?bdg("تسليم تلقائي","b-none")+" ":""}${g?bdg("تم التصحيح","b-done"):bdg("المقالي لم يُصحَّح","b-prog")}</div>
-   <div class="stats s5"><div class="stat"><b id="rv-fin" style="font-size:26px">${g?r1(fin(r)):"–"}</b><span>الدرجة النهائية / 100</span></div><div class="stat"><b>${r1(+r.mcq_score)}</b><span>الاختيار / ${CONFIG.MCQ_MARKS} (تلقائي)</span></div><div class="stat"><b id="rv-tot">${g?r1(+r.teacher_essay_score):"–"}</b><span>المقالي / ${CONFIG.ESSAY_MARKS} (يدوي)</span></div><div class="stat"><b>${mmss(r.time_spent_sec)}</b><span>الوقت</span></div><div class="stat"><b>${r.tab_switches}</b><span>مرات الخروج</span></div></div>
+   <div class="stats s5"><div class="stat"><b id="rv-fin" style="font-size:26px">${g?r1(fin(r)):"–"}</b><span>الدرجة النهائية / 100</span></div><div class="stat"><b id="rv-mcq">${r1(+r.mcq_score)}</b><span>الاختيار / ${CONFIG.MCQ_MARKS} ${r.mcq_override!=null?"(معدّلة)":"(تلقائي)"}</span></div><div class="stat"><b id="rv-tot">${g?r1(+r.teacher_essay_score):"–"}</b><span>المقالي / ${CONFIG.ESSAY_MARKS} (يدوي)</span></div><div class="stat"><b>${mmss(r.time_spent_sec)}</b><span>الوقت</span></div><div class="stat"><b>${r.tab_switches}</b><span>مرات الخروج</span></div></div>
+   <div class="card" style="margin-top:14px"><h3 class="gold">✏️ تعديل درجة الاختيار</h3><div class="sub" style="margin:4px 0 10px">التلقائي من السيرفر: <b>${r.mcq_auto!=null?r1(+r.mcq_auto):"—"}</b> / ${CONFIG.MCQ_MARKS}${r.mcq_override!=null?" · معدّلة يدويًا إلى "+r1(+r.mcq_override):""}</div><div class="fl"><input id="rv-mo" type="number" min="0" max="${CONFIG.MCQ_MARKS}" step="0.25" value="${r.mcq_override??""}" placeholder="الدرجة الجديدة (من ${CONFIG.MCQ_MARKS})"><button class="btn" id="rv-mos">حفظ الدرجة</button><button class="btn ghost" id="rv-mor">↩ رجوع للتلقائي</button></div><div id="rv-mst"></div></div>
    <div class="card" style="margin-top:14px"><h3 class="gold">تصحيح المقالي اليدوي</h3>
     <div class="sub">لكل سؤال: حدّد كل نقطة من النموذج (✔ مذكورة / ◐ جزئية / ✖ ناقصة) وهيتقترح لك الدرجة، وتقدر تغيّرها بإيدك. اكتب تعليقك لو حبيت، وبعد الحفظ كل ده بيظهر للطالب في صفحة نتيجته.</div>
     <label>ملاحظة عامة للطالب (اختياري)</label><textarea id="rv-nt" style="min-height:60px">${esc(r.teacher_note||"")}</textarea>
@@ -808,6 +817,16 @@ async function reviewRow(id){
     const inp=root.querySelector('.em[data-ei="'+ei+'"]');
     if(!inp.dataset.manual){ inp.value=sugg(ei); } upd();
   });
+  const setMcq=async v=>{
+    const {data,error:er}=await sb.rpc("hx_admin_set_mcq",{p_result_id:id,p_score:v}); const st=$("rv-mst");
+    if(er){ st.className="status err"; st.textContent=dbErr(er); return; }
+    r.mcq_score=data.mcq_score; r.mcq_override=data.mcq_override; r.mcq_auto=data.mcq_auto;
+    $("rv-mcq").textContent=r1(+data.mcq_score); $("rv-mo").value=data.mcq_override??"";
+    st.className="status ok"; st.textContent=v==null?"✅ رجعت للدرجة التلقائية ("+r1(+data.mcq_score)+")":"✅ تم تعديل درجة الاختيار إلى "+r1(+data.mcq_score);
+    upd(); loadAll(true);
+  };
+  $("rv-mos").onclick=()=>{ const v=$("rv-mo").value; if(v===""){ alert("اكتب الدرجة الجديدة."); return; } setMcq(Math.min(CONFIG.MCQ_MARKS,Math.max(0,+v))); };
+  $("rv-mor").onclick=()=>setMcq(null);
   $("rv-auto").onclick=()=>{ inputs().forEach(i=>{ if(i.value===""){ i.value=sugg(+i.dataset.ei); } }); upd(); };
   const collect=()=>{
     const marks={}; let any=false;
@@ -891,13 +910,13 @@ function exportPDF(){
 }
 function studentPDF(r){
   const byQ={}; (r.answers||[]).forEach(a=>{ byQ[a.q]=a.chosen; });
-  const bad=Q.map((q,i)=>({i,q,ch:byQ[i+1]??null})).filter(x=>x.ch!==x.q[1]);
+  const bad=Q.map((q,i)=>({i,q,ch:byQ[i+1]??null})).filter(x=>!isRight(x.i,x.ch));
   const marks=r.teacher_marks||{};
   const ess=E.map((e,ei)=>{ const x=(r.essays||[]).find(z=>z.id!=null?z.id===e.n:z.idx===ei); return `<tr><td>${ei+1}</td><td>${esc(e.q)}</td><td>${esc(x?x.text:"")}</td><td>${marks[ei]==null?"–":(typeof marks[ei]==="object"?marks[ei].m:marks[ei])} / ${e.m}</td><td>${esc(typeof marks[ei]==="object"&&marks[ei]?(marks[ei].f||""):"")}</td></tr>`; }).join("");
   printHTML(pdfHead("تقرير الطالب: "+r.student_name)+`<div class="pm">${esc(r.phone||"")}${r.grp?" · "+esc(r.grp):""}</div>
    <p><b>الاختيار:</b> ${r1(+r.mcq_score)} / ${CONFIG.MCQ_MARKS} &nbsp; <b>المقالي:</b> ${graded(r)?r1(+r.teacher_essay_score):"لم يُصحَّح"} / ${CONFIG.ESSAY_MARKS} &nbsp; <b>النهائي:</b> ${graded(r)?r1(fin(r)):"–"} / 100 &nbsp; <b>الوقت:</b> ${mmss(r.time_spent_sec)} &nbsp; <b>خروج:</b> ${r.tab_switches}</p>
    ${r.teacher_note?`<p><b>ملاحظة المدرس:</b> ${esc(r.teacher_note)}</p>`:""}
-   <h3>أسئلة الاختيار الغلط أو غير المجابة (${bad.length})</h3><table><tr><th>#</th><th>السؤال</th><th>إجابة الطالب</th><th>الصحيحة</th></tr>${bad.map(x=>`<tr><td>${x.i+1}</td><td>${esc(x.q[0])}</td><td>${x.ch==null?"لم يجب":esc(x.ch)}</td><td>${esc(x.q[1])}</td></tr>`).join("")||'<tr><td colspan="4">لا توجد أخطاء</td></tr>'}</table>
+   <h3>أسئلة الاختيار الغلط أو غير المجابة (${bad.length})</h3><table><tr><th>#</th><th>السؤال</th><th>إجابة الطالب</th><th>الصحيحة</th></tr>${bad.map(x=>`<tr><td>${x.i+1}</td><td>${esc(x.q[0])}</td><td>${x.ch==null?"لم يجب":esc(x.ch)}</td><td>${esc(keyOf(x.i).correct)}</td></tr>`).join("")||'<tr><td colspan="4">لا توجد أخطاء</td></tr>'}</table>
    <h3>الأسئلة المقالية</h3><table><tr><th>#</th><th>السؤال</th><th>إجابة الطالب</th><th>الدرجة</th><th>تعليق المدرس</th></tr>${ess}</table>`);
 }
 $("d-pdf").onclick=exportPDF;
@@ -1096,12 +1115,68 @@ async function addToCenter(uid){
   await loadAll(true);
 }
 
+/* ============ نموذج الاختيار + إعدادات عرض النموذج للطلاب ============ */
+function drawKeys(){
+  if(KEY_DIRTY) return;
+  const box=$("p-ky");
+  const sw=(id,label,sub,val)=>`<label style="display:flex;gap:12px;align-items:flex-start;margin:14px 0;font-weight:700;cursor:pointer"><input type="checkbox" id="${id}" ${val?"checked":""} style="width:22px;height:22px;margin-top:3px"><span>${label}<div class="sub" style="font-weight:400">${sub}</div></span></label>`;
+  const rows=Q.map((q,i)=>{
+    const k=keyOf(i), opts=q.slice(1,5), alt=k.alt||[];
+    const changed=k.correct!==q[1]||alt.length||k.voided;
+    return `<div class="card kq" data-i="${i}"><div class="who-row"><p class="qt" style="flex:1;min-width:240px">${i+1}. ${esc(q[0])} ${changed?bdg("معدّل","b-prog"):""}</p><label style="display:flex;gap:8px;align-items:center;margin:0;font-size:13px;cursor:pointer"><input type="checkbox" class="kv" ${k.voided?"checked":""} style="width:18px;height:18px"> إلغاء السؤال (يتحسب صح للكل)</label></div>
+     <div class="opts">${opts.map((o,j)=>`<div class="opt static ${o===k.correct?"right":""}" style="gap:10px"><label style="display:flex;gap:8px;align-items:center;margin:0;cursor:pointer;flex:1"><input type="radio" name="kr${i}" class="kr" value="${j}" ${o===k.correct?"checked":""} style="width:18px;height:18px"><span>${esc(o)}</span></label><label style="display:flex;gap:6px;align-items:center;margin:0;font-size:12.5px;white-space:nowrap;cursor:pointer"><input type="checkbox" class="ka" data-j="${j}" ${alt.includes(o)?"checked":""}> مقبولة أيضًا</label></div>`).join("")}</div></div>`;
+  }).join("");
+  box.innerHTML=`
+   <div class="card"><h3 class="gold">👁 إظهار / إخفاء النموذج عن الطلاب</h3>
+    <div class="sub" style="margin:4px 0">التغيير بيسري على الطلاب خلال ثواني (حتى اللي جوه الامتحان).</div>
+    ${sw("st-before","إظهار «نموذج الإجابة + المقارنة» للمقالي قبل التسليم","لو مقفول: زرار النموذج بيختفي من صفحة الامتحان.",SET.show_model_before_submit)}
+    ${sw("st-after","إظهار النموذج في مراجعة المقالي بعد التسليم والتصحيح","لو مقفول: الطالب يشوف إجابته ودرجته وتعليقك بس، من غير نص النموذج ولا النقاط.",SET.show_model_after_grading)}
+    ${sw("st-mcq","إظهار الإجابات الصحيحة في مراجعة الاختيار","لو مقفول: الطالب يعرف صح/غلط بس، من غير ما يشوف الإجابة الصحيحة.",SET.show_mcq_correct)}
+    <button class="btn" id="st-save">💾 حفظ الإعدادات</button><div id="st-msg"></div>
+    <div class="sub" style="margin-top:10px">ملحوظة: الإخفاء بيتم من واجهة الصفحة. محتوى النموذج نفسه جزء من كود صفحة الامتحان، فلو محتاج سرية كاملة قولي ننقله للسيرفر.</div></div>
+   <div class="card"><h3 class="gold">✏️ تعديل نموذج الاختيار (الإجابات الصحيحة)</h3>
+    <div class="sub" style="margin:4px 0 10px">اختار الإجابة الصحيحة لكل سؤال، وممكن تعلّم إجابات تانية «مقبولة أيضًا»، أو تلغي السؤال (يتحسب صح لكل الطلاب). لما تدوس حفظ، كل نتائج الطلاب بتتصحح تاني تلقائيًا (والدرجات اللي عدّلتها يدويًا بتفضل زي ما هي).</div>
+    ${KEYLOADED?"":'<div class="status err">مش قادر أقرا النموذج من السيرفر. شغّل ملف supabase_setup.sql الجديد وحدّث الصفحة.</div>'}
+    <div class="row"><button class="btn" id="ky-save" ${KEYLOADED?"":"disabled"}>💾 حفظ النموذج وإعادة تصحيح كل الطلاب</button><button class="btn ghost" id="ky-reset">↩ استرجاع النموذج الأصلي (من غير حفظ)</button></div><div id="ky-msg" class="${KY_MSG?KY_MSG.c:""}">${KY_MSG?esc(KY_MSG.t):""}</div></div>
+   <div id="ky-list">${rows}</div>`;
+  box.oninput=box.onchange=e=>{
+    const card=e.target.closest(".kq"); if(!card) return;
+    KEY_DIRTY=true;
+    card.querySelectorAll(".opt").forEach((o,j)=>o.classList.toggle("right",card.querySelectorAll(".kr")[j].checked));
+    $("ky-msg").className="status wait"; $("ky-msg").textContent="⚠️ فيه تعديلات لسه ما اتحفظتش.";
+  };
+  $("st-save").onclick=async()=>{
+    const {error}=await sb.rpc("hx_admin_set_settings",{p_before:$("st-before").checked,p_after:$("st-after").checked,p_mcq:$("st-mcq").checked});
+    const m=$("st-msg"); m.className="status "+(error?"err":"ok"); m.textContent=error?dbErr(error):"✅ تم حفظ الإعدادات وبتسري على الطلاب دلوقتي";
+    if(!error) SET={show_model_before_submit:$("st-before").checked,show_model_after_grading:$("st-after").checked,show_mcq_correct:$("st-mcq").checked};
+  };
+  $("ky-reset").onclick=()=>{
+    box.querySelectorAll(".kq").forEach(card=>{ const i=+card.dataset.i; card.querySelectorAll(".kr").forEach((r,j)=>{ r.checked=(Q[i][1+j]===Q[i][1]); }); card.querySelectorAll(".ka").forEach(a=>{ a.checked=false; }); card.querySelector(".kv").checked=false; card.querySelectorAll(".opt").forEach((o,j)=>o.classList.toggle("right",j===0)); });
+    KEY_DIRTY=true; $("ky-msg").className="status wait"; $("ky-msg").textContent="تم استرجاع الأصلي في الشاشة. اضغط حفظ لتطبيقه.";
+  };
+  $("ky-save").onclick=async()=>{
+    const arr=[];
+    box.querySelectorAll(".kq").forEach(card=>{
+      const i=+card.dataset.i, opts=Q[i].slice(1,5), sel=card.querySelector(".kr:checked");
+      const si=sel?+sel.value:0;
+      const alt=[...card.querySelectorAll(".ka")].filter(a=>a.checked&&+a.dataset.j!==si).map(a=>opts[+a.dataset.j]);
+      arr.push({q:i+1,correct:opts[si],alt,voided:card.querySelector(".kv").checked});
+    });
+    if(!confirm("هيتم حفظ النموذج وإعادة تصحيح الاختيار لـ "+RES.length+" نتيجة. متأكد؟")) return;
+    const {data,error}=await sb.rpc("hx_admin_save_keys",{p_exam_id:CONFIG.EXAM_ID,p_keys:arr});
+    const m=$("ky-msg");
+    if(error){ m.className="status err"; m.textContent=dbErr(error); return; }
+    KEY_DIRTY=false; KY_MSG={c:"status ok",t:"✅ تم حفظ النموذج وإعادة تصحيح "+data+" نتيجة"};
+    await loadAll(true);
+  };
+}
+
 /* ============ تحليل الأسئلة ============ */
 function drawQuestions(){
   const st=Q.map(()=>({n:0,ok:0}));
   RES.forEach(r=>(r.answers||[]).forEach(a=>{ const o=st[a.q-1]; if(o){ o.n++; if(a.ok) o.ok++; } }));
   const rows=st.map((o,i)=>({i,n:o.n,p:o.n?o.ok/o.n*100:null})).filter(x=>x.n>0).sort((a,b)=>a.p-b.p);
-  const row=x=>`<tr><td>${x.i+1}</td><td style="white-space:normal;min-width:260px">${esc(Q[x.i][0])}</td><td>${esc(Q[x.i][1])}</td><td><b style="color:${x.p>=75?"var(--ok)":x.p>=50?"var(--warn)":"var(--bad)"}">${Math.round(x.p)}%</b></td><td>${x.n}</td></tr>`;
+  const row=x=>`<tr><td>${x.i+1}</td><td style="white-space:normal;min-width:260px">${esc(Q[x.i][0])}</td><td>${esc(keyOf(x.i).correct)}</td><td><b style="color:${x.p>=75?"var(--ok)":x.p>=50?"var(--warn)":"var(--bad)"}">${Math.round(x.p)}%</b></td><td>${x.n}</td></tr>`;
   const head="<tr><th>#</th><th>السؤال</th><th>الإجابة الصحيحة</th><th>نسبة الصح</th><th>عدد المجيبين</th></tr>";
   $("p-q").innerHTML=rows.length?`<div class="card"><h3 class="gold">🔥 أصعب 15 سؤال اختيار</h3><div class="tbl" style="max-height:none"><table>${head}${rows.slice(0,15).map(row).join("")}</table></div></div>
    <div class="card"><details><summary style="cursor:pointer;font-weight:800">كل الأسئلة (${rows.length})</summary><div class="tbl" style="max-height:60vh;margin-top:10px"><table>${head}${rows.map(row).join("")}</table></div></details></div>`:'<div class="card"><div class="sub">لا توجد بيانات كافية بعد.</div></div>';
